@@ -1,0 +1,6 @@
+# Build and binaries
+build/
+!build/.keep
+
+# Editor
+.vscode/
