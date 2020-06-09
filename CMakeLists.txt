@@ -7,6 +7,7 @@ add_executable(
   src/color.cpp
   src/main.cpp
   src/progress.cpp
+  src/ray.cpp
   src/vector3.cpp
 )
 
