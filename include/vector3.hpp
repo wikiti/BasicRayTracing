@@ -4,6 +4,8 @@
 
 namespace RayTracingInOneWeekend
 {
+  class Color;
+
   class Vector3
   {
     protected:
@@ -31,6 +33,8 @@ namespace RayTracingInOneWeekend
 
       double Length() const;
       double LengthSquared() const;
+
+      operator Color() const;
 
       static double Dot(const Vector3&, const Vector3&);
       static Vector3 Cross(const Vector3 &u, const Vector3 &v);

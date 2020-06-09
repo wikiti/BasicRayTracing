@@ -1,6 +1,7 @@
 #include <cmath>
 #include <ostream>
 
+#include "color.hpp"
 #include "vector3.hpp"
 
 namespace RayTracingInOneWeekend {
@@ -76,6 +77,25 @@ namespace RayTracingInOneWeekend {
     return X() * X() + Y() * Y() + Z() * Z();
   }
 
+  Vector3::operator Color() const
+  {
+    return Color(X(), Y(), Z());
+  }
+
+  double Vector3::Dot(const Vector3& u, const Vector3& v)
+  {
+    return u.X() * v.X() + u.Y() * v.Y() + u.Z() * v.Z();
+  }
+
+  Vector3 Vector3::Cross(const Vector3& u, const Vector3& v)
+  {
+    return Vector3(
+      u.Y() * v.Z() - u.Z() * v.Y(),
+      u.Z() * v.X() - u.X() * v.Z(),
+      u.X() * v.Y() - u.Y() * v.X()
+    );
+  }
+
   std::ostream& operator<<(std::ostream& out, const Vector3& v)
   {
     return out << v.X() << ' ' << v.Y() << ' ' << v.Z();
@@ -109,19 +129,5 @@ namespace RayTracingInOneWeekend {
   Vector3 operator/(const Vector3& v, double t)
   {
       return (1 / t) * v;
-  }
-
-  double Vector3::Dot(const Vector3& u, const Vector3& v)
-  {
-    return u.X() * v.X() + u.Y() * v.Y() + u.Z() * v.Z();
-  }
-
-  Vector3 Vector3::Cross(const Vector3& u, const Vector3& v)
-  {
-    return Vector3(
-      u.Y() * v.Z() - u.Z() * v.Y(),
-      u.Z() * v.X() - u.X() * v.Z(),
-      u.X() * v.Y() - u.Y() * v.X()
-    );
   }
 }
