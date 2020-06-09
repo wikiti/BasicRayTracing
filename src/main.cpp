@@ -12,8 +12,36 @@ using RayTracingInOneWeekend::Progress;
 using RayTracingInOneWeekend::Ray;
 using RayTracingInOneWeekend::Vector3;
 
+/**
+ * Point: P(x,y,z), Center: C(Cx,Cy,Cz), Radius: R, Ray: Pr(t) = A + tB
+ *
+ * (x - Cx)^2 + (y - Cy)^2 + (z - Cz)^2 = R^2
+ * (x - Cx)^2 + (y - Cy)^2 + (z - Cz)^2 = (P - C) · (P - C)
+ * (P - C) · (P - C) = R^2
+ * (Pr(t) - C) · (Pr(t) - C) = R^2
+ * (A + tB - C) · (A + tB - C) = R^2
+ * t^2(B·B) + 2tB ⋅ (A - C) + (A - C)·(A - C) - R^2 = 0
+ * - a = (B·B)
+ * - b = 2·(A - C)
+ * - c = (A - C)·(A - C) - R^2
+ */
+bool HitSphere(const Point3& center, double radius, const Ray& ray)
+{
+  Vector3 oc = ray.Origin() - center;
+  auto a = Vector3::Dot(ray.Direction(), ray.Direction());
+  auto b = 2.0 * Vector3::Dot(oc, ray.Direction());
+  auto c = Vector3::Dot(oc, oc) - radius * radius;
+  auto discriminant =  b*b - 4*a*c;
+  return discriminant > 0;
+}
+
 Color RayColor(const Ray& r)
 {
+  if (HitSphere(Point3(0, 0, -1), 0.5, r))
+  {
+    return Color(1, 0, 0);
+  }
+
   Vector3 unit = r.Direction();
 
   auto t = 0.5 * (unit.Y() + 1.0);
