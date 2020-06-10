@@ -18,7 +18,7 @@ namespace RayTracingInOneWeekend
     return direction;
   }
 
-  Point3 Ray::at(double t) const
+  Point3 Ray::At(double t) const
   {
     return (Vector3)origin + t * direction;
   }

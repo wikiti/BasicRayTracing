@@ -37,10 +37,12 @@ namespace RayTracingInOneWeekend
       operator Color() const;
 
       static double Dot(const Vector3&, const Vector3&);
-      static Vector3 Cross(const Vector3 &u, const Vector3 &v);
+      static Vector3 Cross(const Vector3&, const Vector3&);
 
       friend std::ostream& operator<<(std::ostream&, const Vector3&);
       friend Vector3 operator+(const Vector3&, const Vector3&);
+      friend Vector3 operator+(double, const Vector3&);
+      friend Vector3 operator+(const Vector3&, double);
       friend Vector3 operator-(const Vector3&, const Vector3&);
       friend Vector3 operator*(const Vector3&, const Vector3&);
       friend Vector3 operator*(double, const Vector3&);

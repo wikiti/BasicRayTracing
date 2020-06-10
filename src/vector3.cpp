@@ -106,6 +106,16 @@ namespace RayTracingInOneWeekend {
     return Vector3(u.X() + v.X(), u.Y() + v.Y(), u.Z() + v.Z());
   }
 
+  Vector3 operator+(double t, const Vector3& u)
+  {
+    return Vector3(u.X() + t, u.Y() + t, u.Z() + t);
+  }
+
+  Vector3 operator+(const Vector3& u, double t)
+  {
+    return t + u;
+  }
+
   Vector3 operator-(const Vector3& u, const Vector3& v)
   {
     return Vector3(u.X() - v.X(), u.Y() - v.Y(), u.Z() - v.Z());

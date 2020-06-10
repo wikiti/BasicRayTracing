@@ -15,7 +15,7 @@ namespace RayTracingInOneWeekend
       Point3 Origin() const;
       Vector3 Direction() const;
 
-      Point3 at(double) const;
+      Point3 At(double) const;
 
     private:
 

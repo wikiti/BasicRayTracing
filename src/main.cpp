@@ -1,3 +1,4 @@
+#include <cmath>
 #include <iostream>
 
 #include "color.hpp"
@@ -25,34 +26,49 @@ using RayTracingInOneWeekend::Vector3;
  * - b = 2·(A - C)
  * - c = (A - C)·(A - C) - R^2
  */
-bool HitSphere(const Point3& center, double radius, const Ray& ray)
+double HitSphere(const Point3& center, double radius, const Ray& ray)
 {
   Vector3 oc = ray.Origin() - center;
   auto a = Vector3::Dot(ray.Direction(), ray.Direction());
   auto b = 2.0 * Vector3::Dot(oc, ray.Direction());
   auto c = Vector3::Dot(oc, oc) - radius * radius;
   auto discriminant =  b*b - 4*a*c;
+
+  if (discriminant < 0)
+  {
+    return -1;
+  }
+  else
+  {
+    return (-b - std::sqrt(discriminant)) / (2 * a);
+  }
+
   return discriminant > 0;
 }
 
-Color RayColor(const Ray& r)
+Color RayColor(const Ray& ray)
 {
-  if (HitSphere(Point3(0, 0, -1), 0.5, r))
+  auto sphere_center = Point3(0, 0, -1);
+  auto t = HitSphere(sphere_center, 0.5, ray);
+
+  if (t > 0)
   {
-    return Color(1, 0, 0);
+    // Calculate the normal, which is (P - C), normalized; each component may be in range [-1,1]
+    auto normal = (ray.At(t) - sphere_center).Normalize();
+
+    // Remap -1/1 to 0/1 by dividing between 2 (*0.5) and adding 1
+    return 0.5 * (1 + normal);
   }
 
-  Vector3 unit = r.Direction();
-
-  auto t = 0.5 * (unit.Y() + 1.0);
+  t = 0.5 * (ray.Direction().Y() + 1.0);
   return (1.0 - t) * Color(1.0, 1.0, 1.0) + t * Color(0.5, 0.7, 1.0);
 }
 
 int main()
 {
   const auto aspect_ratio = 16.0 / 9.0;
-  const int image_width = 384;
-  const int image_height = static_cast<int>(image_width / aspect_ratio);
+  const auto image_width = 384;
+  const auto image_height = static_cast<int>(image_width / aspect_ratio);
 
   auto viewport_height = 2.0;
   auto viewport_width = viewport_height * aspect_ratio;
