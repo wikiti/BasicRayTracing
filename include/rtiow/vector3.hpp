@@ -14,6 +14,10 @@ namespace RTIOW
 
     public:
 
+      static const Vector3 Zero;
+
+    public:
+
       explicit Vector3();
       explicit Vector3(double, double, double);
 

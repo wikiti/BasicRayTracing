@@ -11,6 +11,8 @@ namespace RTIOW {
   Vector3::Vector3(double x, double y, double z) : components { x, y, z }
   {}
 
+  const Vector3 Vector3::Zero = Vector3();
+
   double Vector3::X() const
   {
     return components[0];

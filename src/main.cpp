@@ -1,5 +1,6 @@
 #include "rtiow.hpp"
 
+using RTIOW::Camera;
 using RTIOW::Color;
 using RTIOW::HitInfo;
 using RTIOW::Hittable;
@@ -29,15 +30,9 @@ int main()
   const auto aspect_ratio = 16.0 / 9.0;
   const auto image_width = 384;
   const auto image_height = static_cast<int>(image_width / aspect_ratio);
+  const int samples_per_pixel = 100;
 
-  auto viewport_height = 2.0;
-  auto viewport_width = viewport_height * aspect_ratio;
-  auto focal_length = 1.0;
-
-  auto origin = Point3(0, 0, 0);
-  auto horizontal = Vector3(viewport_width, 0, 0);
-  auto vertical = Vector3(0, viewport_height, 0);
-  auto lower_left_corner = origin - horizontal / 2 - vertical / 2 - Vector3(0, 0, focal_length);
+  Camera camera(Vector3::Zero, aspect_ratio, 1.0);
 
   HittableList world;
   world.Add(std::make_shared<Sphere>(Point3(0, 0, -1), 0.5));
@@ -55,13 +50,18 @@ int main()
 
     for (int i = 0; i < image_width; ++i)
     {
-      auto u = double(i) / (image_width - 1);
-      auto v = double(j) / (image_height - 1);
+      Color pixel_color;
 
-      Ray ray(origin, lower_left_corner + u*horizontal + v*vertical - origin);
-      Color color = RayColor(ray, world);
+      for (int k = 0; k < samples_per_pixel; ++k)
+      {
+        auto u = (i + Utils::Random()) / (image_width - 1);
+        auto v = (j + Utils::Random()) / (image_height - 1);
+        Ray ray = camera.GetRay(u, v);
+        pixel_color += RayColor(ray, world);
+      }
 
-      std::cout << color << std::endl;
+      Color average_color = pixel_color / samples_per_pixel;
+      std::cout << average_color << std::endl;
     }
   }
 

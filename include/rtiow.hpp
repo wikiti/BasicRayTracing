@@ -5,6 +5,7 @@
 #include <limits>
 #include <memory>
 
+#include "rtiow/camera.hpp"
 #include "rtiow/color.hpp"
 #include "rtiow/hit_info.hpp"
 #include "rtiow/hittable_list.hpp"
