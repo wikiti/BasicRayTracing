@@ -2,7 +2,7 @@
 
 #include "rtiow/sphere.hpp"
 
-namespace RayTracingInOneWeekend
+namespace RTIOW
 {
   Sphere::Sphere()
   {}

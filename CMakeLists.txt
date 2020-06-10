@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.0.0)
 
-project(RayTraycingInOneWeekend VERSION 0.0.1)
+project(RayTracingInOneWeekend VERSION 0.0.1)
 
 add_executable(
-  RayTraycingInOneWeekend
+  RayTracingInOneWeekend
 
   src/main.cpp
 
@@ -17,4 +17,4 @@ add_executable(
   src/rtiow/vector3.cpp
 )
 
-target_include_directories(RayTraycingInOneWeekend PUBLIC include)
+target_include_directories(RayTracingInOneWeekend PUBLIC include)

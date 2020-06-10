@@ -5,7 +5,7 @@
 
 #include "rtiow/hittable.hpp"
 
-namespace RayTracingInOneWeekend
+namespace RTIOW
 {
   class HittableList : public Hittable
   {

@@ -2,7 +2,7 @@
 
 #include "rtiow/vector3.hpp"
 
-namespace RayTracingInOneWeekend
+namespace RTIOW
 {
   using Point3 = Vector3;
 }

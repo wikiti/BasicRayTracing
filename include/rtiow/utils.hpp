@@ -1,6 +1,6 @@
 #include <limits>
 
-namespace RayTracingInOneWeekend
+namespace RTIOW
 {
   class Utils
   {

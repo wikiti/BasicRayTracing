@@ -3,7 +3,7 @@
 #include "rtiow/point3.hpp"
 #include "rtiow/vector3.hpp"
 
-namespace RayTracingInOneWeekend
+namespace RTIOW
 {
   class Ray
   {

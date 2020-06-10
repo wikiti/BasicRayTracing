@@ -3,7 +3,7 @@
 #include "rtiow/hittable.hpp"
 #include "rtiow/point3.hpp"
 
-namespace RayTracingInOneWeekend
+namespace RTIOW
 {
   class Sphere: public Hittable
   {

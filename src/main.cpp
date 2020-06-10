@@ -1,15 +1,15 @@
 #include "rtiow.hpp"
 
-using RayTracingInOneWeekend::Color;
-using RayTracingInOneWeekend::HitInfo;
-using RayTracingInOneWeekend::Hittable;
-using RayTracingInOneWeekend::HittableList;
-using RayTracingInOneWeekend::Utils;
-using RayTracingInOneWeekend::Point3;
-using RayTracingInOneWeekend::Progress;
-using RayTracingInOneWeekend::Ray;
-using RayTracingInOneWeekend::Sphere;
-using RayTracingInOneWeekend::Vector3;
+using RTIOW::Color;
+using RTIOW::HitInfo;
+using RTIOW::Hittable;
+using RTIOW::HittableList;
+using RTIOW::Utils;
+using RTIOW::Point3;
+using RTIOW::Progress;
+using RTIOW::Ray;
+using RTIOW::Sphere;
+using RTIOW::Vector3;
 
 Color RayColor(const Ray& ray, const Hittable& world)
 {
@@ -47,7 +47,7 @@ int main()
   std::cout << image_width << ' ' << image_height << ' ' << std::endl;
   std::cout << "255" << std::endl;
 
-  RayTracingInOneWeekend::Progress progress(std::cerr, image_height - 1);
+  RTIOW::Progress progress(std::cerr, image_height - 1);
 
   for (int j = image_height - 1; j >= 0; --j)
   {

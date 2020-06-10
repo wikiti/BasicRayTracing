@@ -1,6 +1,6 @@
 #include "rtiow/hittable_list.hpp"
 
-namespace RayTracingInOneWeekend
+namespace RTIOW
 {
   HittableList::HittableList()
   {}

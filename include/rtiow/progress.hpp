@@ -1,7 +1,7 @@
 #include <ostream>
 #include <string>
 
-namespace RayTracingInOneWeekend
+namespace RTIOW
 {
   class Progress
   {

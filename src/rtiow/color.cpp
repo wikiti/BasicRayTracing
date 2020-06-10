@@ -2,7 +2,7 @@
 
 #include "rtiow/color.hpp"
 
-namespace RayTracingInOneWeekend {
+namespace RTIOW {
   double Color::R() const
   {
     return X();

@@ -2,7 +2,7 @@
 
 #include <ostream>
 
-namespace RayTracingInOneWeekend
+namespace RTIOW
 {
   class Color;
 

@@ -3,7 +3,7 @@
 #include "rtiow/hit_info.hpp"
 #include "rtiow/ray.hpp"
 
-namespace RayTracingInOneWeekend
+namespace RTIOW
 {
   class Hittable
   {

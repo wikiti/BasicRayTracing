@@ -4,7 +4,7 @@
 #include "rtiow/ray.hpp"
 #include "rtiow/vector3.hpp"
 
-namespace RayTracingInOneWeekend
+namespace RTIOW
 {
   class HitInfo
   {

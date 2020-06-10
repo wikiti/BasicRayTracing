@@ -4,7 +4,7 @@
 #include "rtiow/color.hpp"
 #include "rtiow/vector3.hpp"
 
-namespace RayTracingInOneWeekend {
+namespace RTIOW {
   Vector3::Vector3() : components { 0, 0, 0 }
   {}
 

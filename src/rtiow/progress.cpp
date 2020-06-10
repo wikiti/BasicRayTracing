@@ -1,6 +1,6 @@
 #include "rtiow/progress.hpp"
 
-namespace RayTracingInOneWeekend
+namespace RTIOW
 {
   Progress::Progress(std::ostream& os, int m) : ostream(os), max(m), current(0), label("Process: ")
   {}

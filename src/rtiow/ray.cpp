@@ -1,6 +1,6 @@
 #include "rtiow/ray.hpp"
 
-namespace RayTracingInOneWeekend
+namespace RTIOW
 {
   Ray::Ray()
   {}

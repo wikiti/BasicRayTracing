@@ -1,6 +1,6 @@
 #include "rtiow/hit_info.hpp"
 
-namespace RayTracingInOneWeekend
+namespace RTIOW
 {
   HitInfo::HitInfo()
   {}

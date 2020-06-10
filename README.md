@@ -15,9 +15,9 @@ make
 Simply run the build executable, and place the output PPM on a file:
 
 ```
-build/RayTracingInOneWeekend > output.ppm
+build/RTIOW > output.ppm
 ```
 
 ## Resources
 
-- [Online tutorial](https://raytracing.github.io/books/RayTracingInOneWeekend.html)
+- [Online tutorial](https://raytracing.github.io/books/RTIOW.html)
