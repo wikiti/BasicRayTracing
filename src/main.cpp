@@ -29,10 +29,10 @@ using RayTracingInOneWeekend::Vector3;
 double HitSphere(const Point3& center, double radius, const Ray& ray)
 {
   Vector3 oc = ray.Origin() - center;
-  auto a = Vector3::Dot(ray.Direction(), ray.Direction());
-  auto b = 2.0 * Vector3::Dot(oc, ray.Direction());
+  auto a = ray.Direction().LengthSquared();
+  auto half_b = Vector3::Dot(oc, ray.Direction());
   auto c = Vector3::Dot(oc, oc) - radius * radius;
-  auto discriminant =  b*b - 4*a*c;
+  auto discriminant =  half_b*half_b - a*c;
 
   if (discriminant < 0)
   {
@@ -40,10 +40,8 @@ double HitSphere(const Point3& center, double radius, const Ray& ray)
   }
   else
   {
-    return (-b - std::sqrt(discriminant)) / (2 * a);
+    return (-half_b - std::sqrt(discriminant)) / a;
   }
-
-  return discriminant > 0;
 }
 
 Color RayColor(const Ray& ray)
