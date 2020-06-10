@@ -1,4 +1,4 @@
-#include "progress.hpp"
+#include "rtiow/progress.hpp"
 
 namespace RayTracingInOneWeekend
 {

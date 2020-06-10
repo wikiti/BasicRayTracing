@@ -1,4 +1,4 @@
-#include "hit_info.hpp"
+#include "rtiow/hit_info.hpp"
 
 namespace RayTracingInOneWeekend
 {

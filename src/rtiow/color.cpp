@@ -1,6 +1,6 @@
 #include <ostream>
 
-#include "color.hpp"
+#include "rtiow/color.hpp"
 
 namespace RayTracingInOneWeekend {
   double Color::R() const

@@ -1,8 +1,8 @@
 #include <cmath>
 #include <ostream>
 
-#include "color.hpp"
-#include "vector3.hpp"
+#include "rtiow/color.hpp"
+#include "rtiow/vector3.hpp"
 
 namespace RayTracingInOneWeekend {
   Vector3::Vector3() : components { 0, 0, 0 }

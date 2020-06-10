@@ -3,7 +3,7 @@
 #include <memory>
 #include <vector>
 
-#include "hittable.hpp"
+#include "rtiow/hittable.hpp"
 
 namespace RayTracingInOneWeekend
 {

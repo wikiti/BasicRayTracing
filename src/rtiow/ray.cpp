@@ -1,4 +1,4 @@
-#include "ray.hpp"
+#include "rtiow/ray.hpp"
 
 namespace RayTracingInOneWeekend
 {

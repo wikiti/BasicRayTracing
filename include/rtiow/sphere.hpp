@@ -1,7 +1,7 @@
 #pragma once
 
-#include "hittable.hpp"
-#include "point3.hpp"
+#include "rtiow/hittable.hpp"
+#include "rtiow/point3.hpp"
 
 namespace RayTracingInOneWeekend
 {

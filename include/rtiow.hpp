@@ -5,13 +5,13 @@
 #include <limits>
 #include <memory>
 
-#include "color.hpp"
-#include "hit_info.hpp"
-#include "hittable_list.hpp"
-#include "hittable.hpp"
-#include "point3.hpp"
-#include "progress.hpp"
-#include "ray.hpp"
-#include "sphere.hpp"
-#include "utils.hpp"
-#include "vector3.hpp"
+#include "rtiow/color.hpp"
+#include "rtiow/hit_info.hpp"
+#include "rtiow/hittable_list.hpp"
+#include "rtiow/hittable.hpp"
+#include "rtiow/point3.hpp"
+#include "rtiow/progress.hpp"
+#include "rtiow/ray.hpp"
+#include "rtiow/sphere.hpp"
+#include "rtiow/utils.hpp"
+#include "rtiow/vector3.hpp"

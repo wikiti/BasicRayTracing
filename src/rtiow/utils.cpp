@@ -1,4 +1,4 @@
-#include "utils.hpp"
+#include "rtiow/utils.hpp"
 
 namespace RayTracingInOneWeekend
 {

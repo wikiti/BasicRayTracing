@@ -1,6 +1,6 @@
 #include <cmath>
 
-#include "sphere.hpp"
+#include "rtiow/sphere.hpp"
 
 namespace RayTracingInOneWeekend
 {

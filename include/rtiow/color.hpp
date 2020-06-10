@@ -2,7 +2,7 @@
 
 #include <ostream>
 
-#include "vector3.hpp"
+#include "rtiow/vector3.hpp"
 
 namespace RayTracingInOneWeekend
 {

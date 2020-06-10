@@ -1,7 +1,7 @@
 #pragma once
 
-#include "point3.hpp"
-#include "vector3.hpp"
+#include "rtiow/point3.hpp"
+#include "rtiow/vector3.hpp"
 
 namespace RayTracingInOneWeekend
 {

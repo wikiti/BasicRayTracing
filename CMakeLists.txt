@@ -4,15 +4,17 @@ project(RayTraycingInOneWeekend VERSION 0.0.1)
 
 add_executable(
   RayTraycingInOneWeekend
-  src/color.cpp
-  src/hit_info.cpp
-  src/hittable_list.cpp
+
   src/main.cpp
-  src/progress.cpp
-  src/ray.cpp
-  src/sphere.cpp
-  src/utils.cpp
-  src/vector3.cpp
+
+  src/rtiow/color.cpp
+  src/rtiow/hit_info.cpp
+  src/rtiow/hittable_list.cpp
+  src/rtiow/progress.cpp
+  src/rtiow/ray.cpp
+  src/rtiow/sphere.cpp
+  src/rtiow/utils.cpp
+  src/rtiow/vector3.cpp
 )
 
 target_include_directories(RayTraycingInOneWeekend PUBLIC include)
