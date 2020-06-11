@@ -15,6 +15,8 @@ namespace RTIOW
 
       static double Random();
       static double Random(double, double);
+      static Vector3 RandomInUnitSphere();
+      static Vector3 RandomUnitVector();
 
       static double Clamp(double, double, double);
       static Vector3 Clamp(Vector3, double, double);

@@ -12,13 +12,20 @@ using RTIOW::Ray;
 using RTIOW::Sphere;
 using RTIOW::Vector3;
 
-Color RayColor(const Ray& ray, const Hittable& world)
+Color RayColor(const Ray& ray, const Hittable& world, int depth)
 {
+  if (depth <= 0)
+  {
+    return Color(0, 0, 0);
+  }
+
   HitInfo hit_info;
 
-  if (world.Hit(ray, 0, Utils::Infinity, hit_info))
+  // TODO: Overload Hit method to accept 2 arguments
+  if (world.Hit(ray, 0.001, Utils::Infinity, hit_info))
   {
-    return 0.5 * (hit_info.normal + Color(1, 1, 1));
+    Point3 target = hit_info.point + hit_info.normal + Utils::RandomUnitVector();
+    return 0.5 * RayColor(Ray(hit_info.point, target - hit_info.point), world, depth - 1);
   }
 
   auto t = 0.5 * (ray.Direction().Y() + 1.0);
@@ -31,6 +38,7 @@ int main()
   const auto image_width = 384;
   const auto image_height = static_cast<int>(image_width / aspect_ratio);
   const int samples_per_pixel = 100;
+  const int max_depth = 50;
 
   Camera camera(Vector3::Zero, aspect_ratio, 1.0);
 
@@ -57,7 +65,7 @@ int main()
         auto u = (i + Utils::Random()) / (image_width - 1);
         auto v = (j + Utils::Random()) / (image_height - 1);
         Ray ray = camera.GetRay(u, v);
-        pixel_color += RayColor(ray, world);
+        pixel_color += RayColor(ray, world, max_depth);
       }
 
       Color average_color = pixel_color / samples_per_pixel;

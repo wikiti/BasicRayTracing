@@ -26,6 +26,27 @@ namespace RTIOW
   {
     return min + (max - min) * Random();
   }
+  
+  Vector3 Utils::RandomInUnitSphere()
+  {
+    while (true)
+    {
+      auto point = Vector3::Random(-1, 1);
+      if (point.LengthSquared() < 1)
+      {
+        return point;
+      }
+    }
+  }
+  
+  Vector3 Utils::RandomUnitVector()
+  {
+    // NOTE: Very similar to RandomUnitSphere().Normalize();
+    auto a = Random(0, 2 * Pi);
+    auto z = Random(-1, 1);
+    auto r = std::sqrt(1 - z * z);
+    return Vector3(r*std::cos(a), r*std::sin(a), z);
+  }
 
   double Utils::Clamp(double x, double min, double max)
   {

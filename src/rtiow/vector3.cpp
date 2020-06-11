@@ -2,6 +2,7 @@
 #include <ostream>
 
 #include "rtiow/color.hpp"
+#include "rtiow/utils.hpp"
 #include "rtiow/vector3.hpp"
 
 namespace RTIOW {
@@ -96,6 +97,21 @@ namespace RTIOW {
       u.Z() * v.X() - u.X() * v.Z(),
       u.X() * v.Y() - u.Y() * v.X()
     );
+  }
+
+  Vector3 Vector3::Sqrt(const Vector3& u)
+  {
+    return Vector3(std::sqrt(u.X()), std::sqrt(u.Y()), std::sqrt(u.Z()));
+  }
+
+  Vector3 Vector3::Random()
+  {
+    return Vector3(Utils::Random(), Utils::Random(), Utils::Random());
+  }
+
+  Vector3 Vector3::Random(double min, double max)
+  {
+    return Vector3(Utils::Random(min, max), Utils::Random(min, max), Utils::Random(min, max));
   }
 
   std::ostream& operator<<(std::ostream& out, const Vector3& v)
