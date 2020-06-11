@@ -24,6 +24,8 @@ Color RayColor(const Ray& ray, const Hittable& world, int depth)
   // TODO: Overload Hit method to accept 2 arguments
   if (world.Hit(ray, 0.001, Utils::Infinity, hit_info))
   {
+    // Point3 target = hit_info.point + hit_info.normal +
+    //   Utils::RandomInHemisphere(hit_info.normal);
     Point3 target = hit_info.point + hit_info.normal + Utils::RandomUnitVector();
     return 0.5 * RayColor(Ray(hit_info.point, target - hit_info.point), world, depth - 1);
   }

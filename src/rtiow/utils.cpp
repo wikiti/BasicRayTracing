@@ -39,6 +39,13 @@ namespace RTIOW
     }
   }
   
+  Vector3 Utils::RandomInHemisphere(const Vector3& normal)
+  {
+    // Generate a random unit vector; if it's the opposite direction, invert it
+    auto random_unit = RandomUnitVector();
+    return Vector3::Dot(random_unit, normal) > 0 ? random_unit : -random_unit;
+  }
+
   Vector3 Utils::RandomUnitVector()
   {
     // NOTE: Very similar to RandomUnitSphere().Normalize();
