@@ -109,6 +109,15 @@ namespace RTIOW {
     return v - 2 * Dot(v, n) * n;
   }
 
+  // NOTE: Check Snell's Law
+  Vector3 Vector3::Refract(const Vector3& uv, const Vector3& normal, double refraction)
+  {
+    auto cos_theta = Dot(-uv, normal);
+    Vector3 parallel_component = refraction * (uv + cos_theta * normal);
+    Vector3 perpendicular_component = -std::sqrt(1 - parallel_component.LengthSquared()) * normal;
+    return parallel_component + perpendicular_component;
+  }
+
   Vector3 Vector3::Random()
   {
     return Vector3(Utils::Random(), Utils::Random(), Utils::Random());

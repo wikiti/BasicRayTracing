@@ -10,6 +10,7 @@
 #include "rtiow/hit_info.hpp"
 #include "rtiow/hittable_list.hpp"
 #include "rtiow/hittable.hpp"
+#include "rtiow/materials/dielectric.hpp"
 #include "rtiow/materials/lambertian.hpp"
 #include "rtiow/materials/material.hpp"
 #include "rtiow/materials/metal.hpp"
