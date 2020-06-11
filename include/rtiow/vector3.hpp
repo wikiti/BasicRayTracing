@@ -43,6 +43,7 @@ namespace RTIOW
       static double Dot(const Vector3&, const Vector3&);
       static Vector3 Cross(const Vector3&, const Vector3&);
       static Vector3 Sqrt(const Vector3&);
+      static Vector3 Reflect(const Vector3&, const Vector3&);
 
       static Vector3 Random();
       static Vector3 Random(double, double);

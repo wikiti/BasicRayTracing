@@ -103,6 +103,11 @@ namespace RTIOW {
   {
     return Vector3(std::sqrt(u.X()), std::sqrt(u.Y()), std::sqrt(u.Z()));
   }
+  
+  Vector3 Vector3::Reflect(const Vector3& v, const Vector3& n)
+  {
+    return v - 2 * Dot(v, n) * n;
+  }
 
   Vector3 Vector3::Random()
   {

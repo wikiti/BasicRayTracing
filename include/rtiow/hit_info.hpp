@@ -1,11 +1,18 @@
 #pragma once
 
+#include <memory>
+
 #include "rtiow/point3.hpp"
 #include "rtiow/ray.hpp"
 #include "rtiow/vector3.hpp"
 
 namespace RTIOW
 {
+  namespace Materials
+  {
+    class Material;
+  }
+
   class HitInfo
   {
     public:
@@ -21,5 +28,6 @@ namespace RTIOW
       Vector3 normal;
       double distance;
       bool front_face;
+      std::shared_ptr<Materials::Material> material_ptr;
   };
 }

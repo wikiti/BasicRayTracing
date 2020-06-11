@@ -1,6 +1,9 @@
 #pragma once
 
+#include <memory>
+
 #include "rtiow/hittable.hpp"
+#include "rtiow/materials/material.hpp"
 #include "rtiow/point3.hpp"
 
 namespace RTIOW
@@ -10,7 +13,7 @@ namespace RTIOW
     public:
 
       Sphere();
-      Sphere(Point3, double);
+      Sphere(Point3, double, std::shared_ptr<Materials::Material>);
 
       Point3 Center() const;
       double Radius() const;
@@ -25,6 +28,7 @@ namespace RTIOW
 
       Point3 center;
       double radius;
+      std::shared_ptr<Materials::Material> material_ptr;
 
   };
 }

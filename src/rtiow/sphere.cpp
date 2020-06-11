@@ -7,7 +7,8 @@ namespace RTIOW
   Sphere::Sphere()
   {}
 
-  Sphere::Sphere(Point3 center, double radius) : center(center), radius(radius)
+  Sphere::Sphere(Point3 center, double radius, std::shared_ptr<Materials::Material> material_ptr) :
+    center(center), radius(radius), material_ptr(material_ptr)
   {}
 
   Point3 Sphere::Center() const
@@ -63,6 +64,7 @@ namespace RTIOW
 
     hit_info.distance = t;
     hit_info.point = ray.At(hit_info.distance);
+    hit_info.material_ptr = material_ptr;
     Vector3 outward_normal = (hit_info.point - center) / radius;
     hit_info.SetFaceNormal(ray, outward_normal);
     return true;

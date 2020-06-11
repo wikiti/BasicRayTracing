@@ -5,6 +5,8 @@ using RTIOW::Color;
 using RTIOW::HitInfo;
 using RTIOW::Hittable;
 using RTIOW::HittableList;
+using RTIOW::Materials::Lambertian;
+using RTIOW::Materials::Metal;
 using RTIOW::Utils;
 using RTIOW::Point3;
 using RTIOW::Progress;
@@ -24,14 +26,48 @@ Color RayColor(const Ray& ray, const Hittable& world, int depth)
   // TODO: Overload Hit method to accept 2 arguments
   if (world.Hit(ray, 0.001, Utils::Infinity, hit_info))
   {
-    // Point3 target = hit_info.point + hit_info.normal +
-    //   Utils::RandomInHemisphere(hit_info.normal);
-    Point3 target = hit_info.point + hit_info.normal + Utils::RandomUnitVector();
-    return 0.5 * RayColor(Ray(hit_info.point, target - hit_info.point), world, depth - 1);
+    Ray scattered;
+    Color attenuation;
+
+    if (hit_info.material_ptr->Scatter(ray, hit_info, attenuation, scattered))
+    {
+      return attenuation * RayColor(scattered, world, depth - 1);
+    }
+
+    return Color(0, 0, 0);
   }
 
   auto t = 0.5 * (ray.Direction().Y() + 1.0);
   return (1.0 - t) * Color(1.0, 1.0, 1.0) + t * Color(0.5, 0.7, 1.0);
+}
+
+HittableList BuildWorld()
+{
+  HittableList world;
+  world.Add(std::make_shared<Sphere>(
+    Point3(0, 0, -1),
+    0.5,
+    std::make_shared<Lambertian>(Color(0.7, 0.3, 0.3)))
+  );
+  world.Add(std::make_shared<Sphere>(
+    Point3(0, -100.5, -1),
+    100,
+    std::make_shared<Lambertian>(Color(0.8, 0.8, 0.0)))
+  );
+
+  world.Add(std::make_shared<Sphere>(
+    Point3(1, 0, -1),
+    0.5,
+    std::make_shared<Metal>(Color(0.8, 0.6, 0.2)))
+  );
+
+  world.Add(std::make_shared<Sphere>(
+    Point3(-1, 0, -1),
+    0.5,
+    std::make_shared<Metal>(Color(0.8, 0.8, 0.8)))
+  );
+
+  return world;
 }
 
 int main()
@@ -44,9 +80,7 @@ int main()
 
   Camera camera(Vector3::Zero, aspect_ratio, 1.0);
 
-  HittableList world;
-  world.Add(std::make_shared<Sphere>(Point3(0, 0, -1), 0.5));
-  world.Add(std::make_shared<Sphere>(Point3(0, -100.5, -1), 100));
+  HittableList world = BuildWorld();
 
   std::cout << "P3" << std::endl;
   std::cout << image_width << ' ' << image_height << ' ' << std::endl;
