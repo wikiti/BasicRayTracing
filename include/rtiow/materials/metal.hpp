@@ -14,10 +14,11 @@ namespace RTIOW
       private:
 
         Color albedo;
+        double fuzz;
       
       public:
 
-        Metal(const Color&);
+        Metal(const Color&, double);
 
         virtual bool Scatter(const Ray&, const HitInfo&, Color&, Ray&) const;
     };

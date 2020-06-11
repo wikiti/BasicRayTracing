@@ -58,13 +58,13 @@ HittableList BuildWorld()
   world.Add(std::make_shared<Sphere>(
     Point3(1, 0, -1),
     0.5,
-    std::make_shared<Metal>(Color(0.8, 0.6, 0.2)))
+    std::make_shared<Metal>(Color(0.8, 0.2, 0.0), 1.0))
   );
 
   world.Add(std::make_shared<Sphere>(
     Point3(-1, 0, -1),
     0.5,
-    std::make_shared<Metal>(Color(0.8, 0.8, 0.8)))
+    std::make_shared<Metal>(Color(0.8, 0.8, 0.8), 0.3))
   );
 
   return world;
