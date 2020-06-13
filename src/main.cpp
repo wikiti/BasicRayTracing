@@ -68,6 +68,13 @@ HittableList BuildWorld()
     std::make_shared<Dielectric>(1.5))
   );
 
+  // Glass buble trick achieve by using a negative radius!
+  world.Add(std::make_shared<Sphere>(
+    Point3(-1, 0, -1),
+    -0.45,
+    std::make_shared<Dielectric>(1.5))
+  );
+
   return world;
 }
 

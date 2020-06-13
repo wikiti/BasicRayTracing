@@ -20,6 +20,11 @@ namespace RTIOW
         Dielectric(double);
 
         virtual bool Scatter(const Ray&, const HitInfo&, Color&, Ray&) const;
+
+      private:
+
+        bool ShouldReflect(const Vector3&, const HitInfo&, double) const;
+        double Schlick(double, double) const;
     };
   }
 }
