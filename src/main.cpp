@@ -48,7 +48,7 @@ HittableList BuildWorld()
   world.Add(std::make_shared<Sphere>(
     Point3(0, 0, -1),
     0.5,
-    std::make_shared<Dielectric>(1.5))
+    std::make_shared<Lambertian>(Color(0.1, 0.2, 0.5)))
   );
   world.Add(std::make_shared<Sphere>(
     Point3(0, -100.5, -1),
@@ -59,13 +59,13 @@ HittableList BuildWorld()
   world.Add(std::make_shared<Sphere>(
     Point3(1, 0, -1),
     0.5,
-    std::make_shared<Dielectric>(1.5))
+    std::make_shared<Metal>(Color(0.8, 0.6, 0.2), 0.0))
   );
 
   world.Add(std::make_shared<Sphere>(
     Point3(-1, 0, -1),
     0.5,
-    std::make_shared<Metal>(Color(0.8, 0.8, 0.8), 0.3))
+    std::make_shared<Dielectric>(1.5))
   );
 
   return world;
