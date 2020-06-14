@@ -7,6 +7,7 @@ using RTIOW::Hittable;
 using RTIOW::HittableList;
 using RTIOW::Materials::Dielectric;
 using RTIOW::Materials::Lambertian;
+using RTIOW::Materials::Material;
 using RTIOW::Materials::Metal;
 using RTIOW::Utils;
 using RTIOW::Point3;
@@ -24,8 +25,7 @@ Color RayColor(const Ray& ray, const Hittable& world, int depth)
 
   HitInfo hit_info;
 
-  // TODO: Overload Hit method to accept 2 arguments
-  if (world.Hit(ray, 0.001, Utils::Infinity, hit_info))
+  if (world.Hit(ray, hit_info))
   {
     Ray scattered;
     Color attenuation;
@@ -45,35 +45,50 @@ Color RayColor(const Ray& ray, const Hittable& world, int depth)
 HittableList BuildWorld()
 {
   HittableList world;
-  world.Add(std::make_shared<Sphere>(
-    Point3(0, 0, -1),
-    0.5,
-    std::make_shared<Lambertian>(Color(0.1, 0.2, 0.5)))
-  );
-  world.Add(std::make_shared<Sphere>(
-    Point3(0, -100.5, -1),
-    100,
-    std::make_shared<Lambertian>(Color(0.8, 0.8, 0.0)))
-  );
 
-  world.Add(std::make_shared<Sphere>(
-    Point3(1, 0, -1),
-    0.5,
-    std::make_shared<Metal>(Color(0.8, 0.6, 0.2), 0.0))
-  );
+  auto ground_material = std::make_shared<Lambertian>(Color(0.5, 0.5, 0.5));
+  world.Add(std::make_shared<Sphere>(Point3(0,-1000,0), 1000, ground_material));
 
-  world.Add(std::make_shared<Sphere>(
-    Point3(-1, 0, -1),
-    0.5,
-    std::make_shared<Dielectric>(1.5))
-  );
+  for (int a = -11; a < 11; ++a)
+  {
+      for (int b = -11; b < 11; ++b)
+      {
+          auto choose_mat = Utils::Random();
+          Point3 center(a + 0.9 * Utils::Random(), 0.2, b + 0.9 * Utils::Random());
 
-  // Glass buble trick achieve by using a negative radius!
-  world.Add(std::make_shared<Sphere>(
-    Point3(-1, 0, -1),
-    -0.45,
-    std::make_shared<Dielectric>(1.5))
-  );
+          if ((center - Point3(4, 0.2, 0)).Length() > 0.9)
+          {
+              std::shared_ptr<Material> sphere_material;
+
+              if (choose_mat < 0.8) // diffuse
+              {
+                auto albedo = Color::Random() * Color::Random();
+                sphere_material = std::make_shared<Lambertian>(albedo);
+              }
+              else if (choose_mat < 0.95) // metal
+              {
+                auto albedo = Color::Random(0.5, 1);
+                auto fuzz = Utils::Random(0, 0.5);
+                sphere_material = std::make_shared<Metal>(albedo, fuzz);
+              }
+              else // glass
+              {
+                sphere_material = std::make_shared<Dielectric>(1.5);
+              }
+
+              world.Add(std::make_shared<Sphere>(center, 0.2, sphere_material));
+          }
+      }
+  }
+
+  auto material1 = std::make_shared<Dielectric>(1.5);
+  world.Add(std::make_shared<Sphere>(Point3(0, 1, 0), 1.0, material1));
+
+  auto material2 = std::make_shared<Lambertian>(Color(0.4, 0.2, 0.1));
+  world.Add(std::make_shared<Sphere>(Point3(-4, 1, 0), 1.0, material2));
+
+  auto material3 = std::make_shared<Metal>(Color(0.7, 0.6, 0.5), 0.0);
+  world.Add(std::make_shared<Sphere>(Point3(4, 1, 0), 1.0, material3));
 
   return world;
 }
@@ -86,8 +101,7 @@ int main()
   const int samples_per_pixel = 100;
   const int max_depth = 50;
 
-  Camera camera(Point3(3, 3, 2), Point3(0, 0, -1), Vector3::Up, aspect_ratio, 20, 2.0);
-
+  Camera camera(Point3(12, 2, 3), Point3::Zero, Vector3::Up, aspect_ratio, 20, 0.1);
   HittableList world = BuildWorld();
 
   std::cout << "P3" << std::endl;
