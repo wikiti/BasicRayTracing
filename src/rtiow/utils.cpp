@@ -39,6 +39,11 @@ namespace RTIOW
     }
   }
   
+  Vector3 Utils::RandomInUnitDisk()
+  {
+    return RandomInUnitSphere() * Vector3(1, 1, 0);
+  }
+
   Vector3 Utils::RandomInHemisphere(const Vector3& normal)
   {
     // Generate a random unit vector; if it's the opposite direction, invert it

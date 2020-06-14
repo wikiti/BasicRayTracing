@@ -15,6 +15,12 @@ namespace RTIOW
     public:
 
       static const Vector3 Zero;
+      static const Vector3 Up;
+      static const Vector3 Down;
+      static const Vector3 Forward;
+      static const Vector3 Back;
+      static const Vector3 Right;
+      static const Vector3 Left;
 
     public:
 

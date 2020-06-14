@@ -86,7 +86,7 @@ int main()
   const int samples_per_pixel = 100;
   const int max_depth = 50;
 
-  Camera camera(Vector3::Zero, aspect_ratio, 1.0);
+  Camera camera(Point3(3, 3, 2), Point3(0, 0, -1), Vector3::Up, aspect_ratio, 20, 2.0);
 
   HittableList world = BuildWorld();
 
