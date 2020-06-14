@@ -1,20 +1,20 @@
-#include "rtiow.hpp"
+#include "brt.hpp"
 
-using RTIOW::Camera;
-using RTIOW::Color;
-using RTIOW::HitInfo;
-using RTIOW::Hittable;
-using RTIOW::HittableList;
-using RTIOW::Materials::Dielectric;
-using RTIOW::Materials::Lambertian;
-using RTIOW::Materials::Material;
-using RTIOW::Materials::Metal;
-using RTIOW::Utils;
-using RTIOW::Point3;
-using RTIOW::Progress;
-using RTIOW::Ray;
-using RTIOW::Sphere;
-using RTIOW::Vector3;
+using BRT::Camera;
+using BRT::Color;
+using BRT::HitInfo;
+using BRT::Hittable;
+using BRT::HittableList;
+using BRT::Materials::Dielectric;
+using BRT::Materials::Lambertian;
+using BRT::Materials::Material;
+using BRT::Materials::Metal;
+using BRT::Utils;
+using BRT::Point3;
+using BRT::Progress;
+using BRT::Ray;
+using BRT::Sphere;
+using BRT::Vector3;
 
 Color RayColor(const Ray& ray, const Hittable& world, int depth)
 {
@@ -108,7 +108,7 @@ int main()
   std::cout << image_width << ' ' << image_height << ' ' << std::endl;
   std::cout << "255" << std::endl;
 
-  RTIOW::Progress progress(std::cerr, image_height - 1);
+  BRT::Progress progress(std::cerr, image_height - 1);
 
   for (int j = image_height - 1; j >= 0; --j)
   {
