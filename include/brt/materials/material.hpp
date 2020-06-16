@@ -1,7 +1,7 @@
 #pragma once
 
 #include "brt/color.hpp"
-#include "brt/hit_info.hpp"
+#include "brt/hittables/hit_info.hpp"
 #include "brt/ray.hpp"
 
 namespace BRT
@@ -12,7 +12,7 @@ namespace BRT
     {
       public:
 
-        virtual bool Scatter(const Ray&, const HitInfo&, Color&, Ray&) const = 0;
+        virtual bool Scatter(const Ray&, const Hittables::HitInfo&, Color&, Ray&) const = 0;
     };
   }
 }

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "brt/color.hpp"
-#include "brt/hit_info.hpp"
+#include "brt/hittables/hit_info.hpp"
 #include "brt/materials/material.hpp"
 #include "brt/ray.hpp"
 
@@ -19,11 +19,11 @@ namespace BRT
 
         Dielectric(double);
 
-        virtual bool Scatter(const Ray&, const HitInfo&, Color&, Ray&) const;
+        virtual bool Scatter(const Ray&, const Hittables::HitInfo&, Color&, Ray&) const;
 
       private:
 
-        bool ShouldReflect(const Vector3&, const HitInfo&, double) const;
+        bool ShouldReflect(const Vector3&, const Hittables::HitInfo&, double) const;
         double Schlick(double, double) const;
     };
   }

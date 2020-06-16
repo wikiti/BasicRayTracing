@@ -1,7 +1,6 @@
 # Basic Ray Tracing (BRT)
 
-My own version of the CPU Ray Tracing engine, created by following the _"Ray Tracing in One
-Weekend"_ tutorial (actually, it took me nearly one week for the first part, but close enough!).
+An implementation of a CPU Ray Tracing engine, created by following the "Ray Tracing in One Weekend" tutorial (actually, it took me nearly one week for the first part).
 
 ![Sample render](images/lots-of-spheres.png)
 

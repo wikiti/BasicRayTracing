@@ -2,9 +2,10 @@
 
 using BRT::Camera;
 using BRT::Color;
-using BRT::HitInfo;
-using BRT::Hittable;
-using BRT::HittableList;
+using BRT::Hittables::HitInfo;
+using BRT::Hittables::Hittable;
+using BRT::Hittables::HittableList;
+using BRT::Hittables::Sphere;
 using BRT::Materials::Dielectric;
 using BRT::Materials::Lambertian;
 using BRT::Materials::Material;
@@ -13,7 +14,6 @@ using BRT::Utils;
 using BRT::Point3;
 using BRT::Progress;
 using BRT::Ray;
-using BRT::Sphere;
 using BRT::Vector3;
 
 Color RayColor(const Ray& ray, const Hittable& world, int depth)

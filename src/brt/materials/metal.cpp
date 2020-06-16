@@ -9,7 +9,7 @@ namespace BRT
     Metal::Metal(const Color& color, double fuzz) : albedo(color), fuzz(Utils::Clamp(fuzz, 0, 1))
     {}
 
-    bool Metal::Scatter(const Ray& ray, const HitInfo& hit_info, Color& attenuation,
+    bool Metal::Scatter(const Ray& ray, const Hittables::HitInfo& hit_info, Color& attenuation,
                              Ray& scattered) const {
 
       Vector3 reflected = Vector3::Reflect(ray.Direction().Normalize(), hit_info.normal);

@@ -11,7 +11,7 @@ namespace BRT
     Dielectric::Dielectric(double refraction_index) : refraction_index(refraction_index)
     {}
 
-    bool Dielectric::Scatter(const Ray& ray, const HitInfo& hit_info, Color& attenuation,
+    bool Dielectric::Scatter(const Ray& ray, const Hittables::HitInfo& hit_info, Color& attenuation,
                              Ray& scattered) const {
 
       attenuation = Color(1.0, 1.0, 1.0);
@@ -34,7 +34,7 @@ namespace BRT
     }
 
 
-    bool Dielectric::ShouldReflect(const Vector3& dir, const HitInfo& hit_info,
+    bool Dielectric::ShouldReflect(const Vector3& dir, const Hittables::HitInfo& hit_info,
                                    double refraction) const
     {
       // Angle between the normal and the ray before refraction

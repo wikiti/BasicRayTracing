@@ -9,7 +9,7 @@ namespace BRT
     Lambertian::Lambertian(const Color& color) : albedo(color)
     {}
 
-    bool Lambertian::Scatter(const Ray& ray, const HitInfo& hit_info, Color& attenuation,
+    bool Lambertian::Scatter(const Ray& ray, const Hittables::HitInfo& hit_info, Color& attenuation,
                              Ray& scattered) const {
 
       // Vector3 scatter_direction = hit_info.normal + Utils::RandomInHemisphere();
