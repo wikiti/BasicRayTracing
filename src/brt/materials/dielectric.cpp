@@ -23,13 +23,13 @@ namespace BRT
       if (ShouldReflect(before, hit_info, refraction))
       {
         Vector3 reflected = Vector3::Reflect(before, hit_info.normal);
-        scattered = Ray(hit_info.point, reflected);
+        scattered = Ray(hit_info.point, reflected, ray.Time());
         return true;
       }
 
       // Must refract
       Vector3 refracted = Vector3::Refract(before, hit_info.normal, refraction);
-      scattered = Ray(hit_info.point, refracted);
+      scattered = Ray(hit_info.point, refracted, ray.Time());
       return true;
     }
 

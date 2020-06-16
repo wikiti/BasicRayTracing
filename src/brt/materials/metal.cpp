@@ -13,7 +13,7 @@ namespace BRT
                              Ray& scattered) const {
 
       Vector3 reflected = Vector3::Reflect(ray.Direction().Normalize(), hit_info.normal);
-      scattered = Ray(hit_info.point, reflected + fuzz * Utils::RandomInUnitSphere());
+      scattered = Ray(hit_info.point, reflected + fuzz * Utils::RandomInUnitSphere(), ray.Time());
       attenuation = albedo;
 
       // If it's oriented among the normal, do not scatter the ray, since it probably reflected

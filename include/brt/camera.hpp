@@ -10,7 +10,7 @@ namespace BRT
     public:
 
       Camera(Point3 look_from, Point3 look_at, Vector3 up, double aspect_ratio, double fov,
-        double aperture);
+        double aperture, double time_start = 0, double time_end = 0);
 
       Ray GetRay(double, double) const;
 
@@ -22,5 +22,6 @@ namespace BRT
       Vector3 vertical;
       Vector3 u, v, w;
       double lens_radius;
+      double time_start, time_end; // Used in moving blur (shutter open/close times)
   };
 }

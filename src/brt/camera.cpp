@@ -6,7 +6,9 @@
 namespace BRT
 {
   Camera::Camera(Point3 look_from, Point3 look_at, Vector3 up, double aspect_ratio, double fov,
-    double aperture) : origin(look_from)
+    double aperture, double time_start, double time_end) : origin(look_from),
+                                                           time_start(time_start),
+                                                           time_end(time_end)
   {
     auto theta = Utils::DegreesToRadians(fov);
     auto h = std::tan(theta / 2);
@@ -33,7 +35,8 @@ namespace BRT
 
     return Ray(
       origin + offset,
-      lower_left_corner + s * horizontal + t * vertical - origin - offset
+      lower_left_corner + s * horizontal + t * vertical - origin - offset,
+      Utils::Random(time_start, time_end)
     );
   }
 }

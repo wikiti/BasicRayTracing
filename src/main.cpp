@@ -5,15 +5,17 @@ using BRT::Color;
 using BRT::Hittables::HitInfo;
 using BRT::Hittables::Hittable;
 using BRT::Hittables::HittableList;
+using BRT::Hittables::MovingSphere;
 using BRT::Hittables::Sphere;
 using BRT::Materials::Dielectric;
 using BRT::Materials::Lambertian;
 using BRT::Materials::Material;
 using BRT::Materials::Metal;
-using BRT::Utils;
+using BRT::MovingPoint3;
 using BRT::Point3;
 using BRT::Progress;
 using BRT::Ray;
+using BRT::Utils;
 using BRT::Vector3;
 
 Color RayColor(const Ray& ray, const Hittable& world, int depth)
@@ -64,19 +66,24 @@ HittableList BuildWorld()
               {
                 auto albedo = Color::Random() * Color::Random();
                 sphere_material = std::make_shared<Lambertian>(albedo);
+                MovingPoint3 moving_center(
+                  center, center + Vector3(0, Utils::Random(0, 0.5), 0),
+                  0.0, 1.0
+                );
+                world.Add(std::make_shared<MovingSphere>(moving_center, 0.2, sphere_material));
               }
               else if (choose_mat < 0.95) // metal
               {
                 auto albedo = Color::Random(0.5, 1);
                 auto fuzz = Utils::Random(0, 0.5);
                 sphere_material = std::make_shared<Metal>(albedo, fuzz);
+                world.Add(std::make_shared<Sphere>(center, 0.2, sphere_material));
               }
               else // glass
               {
                 sphere_material = std::make_shared<Dielectric>(1.5);
+                world.Add(std::make_shared<Sphere>(center, 0.2, sphere_material));
               }
-
-              world.Add(std::make_shared<Sphere>(center, 0.2, sphere_material));
           }
       }
   }
@@ -101,7 +108,7 @@ int main()
   const int samples_per_pixel = 100;
   const int max_depth = 50;
 
-  Camera camera(Point3(12, 2, 3), Point3::Zero, Vector3::Up, aspect_ratio, 20, 0.1);
+  Camera camera(Point3(13, 2, 3), Point3::Zero, Vector3::Up, aspect_ratio, 20, 0.0, 0.0, 1.0);
   HittableList world = BuildWorld();
 
   std::cout << "P3" << std::endl;

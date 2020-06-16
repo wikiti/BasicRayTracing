@@ -14,7 +14,7 @@ namespace BRT
 
       // Vector3 scatter_direction = hit_info.normal + Utils::RandomInHemisphere();
       Vector3 scatter_direction = hit_info.normal + Utils::RandomUnitVector();
-      scattered = Ray(hit_info.point, scatter_direction);
+      scattered = Ray(hit_info.point, scatter_direction, ray.Time());
       attenuation = albedo;
 
       return true;

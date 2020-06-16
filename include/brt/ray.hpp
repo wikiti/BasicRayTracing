@@ -10,10 +10,11 @@ namespace BRT
     public:
 
       Ray();
-      Ray(const Point3&, const Vector3&);
+      Ray(const Point3&, const Vector3&, double = 0.0);
 
       Point3 Origin() const;
       Vector3 Direction() const;
+      double Time() const;
 
       Point3 At(double) const;
 
@@ -21,5 +22,6 @@ namespace BRT
 
       Point3 origin;
       Vector3 direction;
+      double time;
   };
 }
