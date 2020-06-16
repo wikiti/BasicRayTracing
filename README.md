@@ -1,13 +1,13 @@
 # Basic Ray Tracing (BRT)
 
 My own version of the CPU Ray Tracing engine, created by following the _"Ray Tracing in One
-Weekend"_ tutorial (actually, it took me nearly one week, but close enough).
+Weekend"_ tutorial (actually, it took me nearly one week for the first part, but close enough!).
 
 ![Sample render](images/lots-of-spheres.png)
 
 ## Build
 
-Use cmake to build the project:
+Use `cmake` and `make` to build the project:
 
 ```
 cd build
@@ -25,4 +25,4 @@ build/BasicRayTracing > output.ppm
 
 ## Resources
 
-- [Ray Tracing in One Weekend](https://raytracing.github.io/books/RayTracingInOneWeekend.html)
+- [Ray Tracing in One Weekend - The Book Series](https://raytracing.github.io/)
