@@ -15,41 +15,17 @@ using BRT::MovingPoint3;
 using BRT::Point3;
 using BRT::Progress;
 using BRT::Ray;
+using BRT::Render::Image;
+using BRT::Render::Renderer;
 using BRT::Utils;
 using BRT::Vector3;
 
-Color RayColor(const Ray& ray, const Hittable& world, int depth)
+std::shared_ptr<Hittable> BuildWorld()
 {
-  if (depth <= 0)
-  {
-    return Color(0, 0, 0);
-  }
-
-  HitInfo hit_info;
-
-  if (world.Hit(ray, hit_info))
-  {
-    Ray scattered;
-    Color attenuation;
-
-    if (hit_info.material_ptr->Scatter(ray, hit_info, attenuation, scattered))
-    {
-      return attenuation * RayColor(scattered, world, depth - 1);
-    }
-
-    return Color(0, 0, 0);
-  }
-
-  auto t = 0.5 * (ray.Direction().Y() + 1.0);
-  return (1.0 - t) * Color(1.0, 1.0, 1.0) + t * Color(0.5, 0.7, 1.0);
-}
-
-HittableList BuildWorld()
-{
-  HittableList world;
+  std::shared_ptr<HittableList> world = std::make_shared<HittableList>();;
 
   auto ground_material = std::make_shared<Lambertian>(Color(0.5, 0.5, 0.5));
-  world.Add(std::make_shared<Sphere>(Point3(0,-1000,0), 1000, ground_material));
+  world->Add(std::make_shared<Sphere>(Point3(0,-1000,0), 1000, ground_material));
 
   for (int a = -11; a < 11; ++a)
   {
@@ -70,32 +46,32 @@ HittableList BuildWorld()
                   center, center + Vector3(0, Utils::Random(0, 0.5), 0),
                   0.0, 1.0
                 );
-                world.Add(std::make_shared<MovingSphere>(moving_center, 0.2, sphere_material));
+                world->Add(std::make_shared<MovingSphere>(moving_center, 0.2, sphere_material));
               }
               else if (choose_mat < 0.95) // metal
               {
                 auto albedo = Color::Random(0.5, 1);
                 auto fuzz = Utils::Random(0, 0.5);
                 sphere_material = std::make_shared<Metal>(albedo, fuzz);
-                world.Add(std::make_shared<Sphere>(center, 0.2, sphere_material));
+                world->Add(std::make_shared<Sphere>(center, 0.2, sphere_material));
               }
               else // glass
               {
                 sphere_material = std::make_shared<Dielectric>(1.5);
-                world.Add(std::make_shared<Sphere>(center, 0.2, sphere_material));
+                world->Add(std::make_shared<Sphere>(center, 0.2, sphere_material));
               }
           }
       }
   }
 
   auto material1 = std::make_shared<Dielectric>(1.5);
-  world.Add(std::make_shared<Sphere>(Point3(0, 1, 0), 1.0, material1));
+  world->Add(std::make_shared<Sphere>(Point3(0, 1, 0), 1.0, material1));
 
   auto material2 = std::make_shared<Lambertian>(Color(0.4, 0.2, 0.1));
-  world.Add(std::make_shared<Sphere>(Point3(-4, 1, 0), 1.0, material2));
+  world->Add(std::make_shared<Sphere>(Point3(-4, 1, 0), 1.0, material2));
 
   auto material3 = std::make_shared<Metal>(Color(0.7, 0.6, 0.5), 0.0);
-  world.Add(std::make_shared<Sphere>(Point3(4, 1, 0), 1.0, material3));
+  world->Add(std::make_shared<Sphere>(Point3(4, 1, 0), 1.0, material3));
 
   return world;
 }
@@ -105,38 +81,14 @@ int main()
   const auto aspect_ratio = 16.0 / 9.0;
   const auto image_width = 384;
   const auto image_height = static_cast<int>(image_width / aspect_ratio);
-  const int samples_per_pixel = 100;
-  const int max_depth = 50;
 
+  std::shared_ptr<Hittable> world = BuildWorld();
   Camera camera(Point3(13, 2, 3), Point3::Zero, Vector3::Up, aspect_ratio, 20, 0.0, 0.0, 1.0);
-  HittableList world = BuildWorld();
+  Image image(image_width, image_height);
+  Renderer renderer(camera, world);
 
-  std::cout << "P3" << std::endl;
-  std::cout << image_width << ' ' << image_height << ' ' << std::endl;
-  std::cout << "255" << std::endl;
-
-  BRT::Progress progress(std::cerr, image_height - 1);
-
-  for (int j = image_height - 1; j >= 0; --j)
-  {
-    progress.update(image_height - j - 1);
-
-    for (int i = 0; i < image_width; ++i)
-    {
-      Color pixel_color;
-
-      for (int k = 0; k < samples_per_pixel; ++k)
-      {
-        auto u = (i + Utils::Random()) / (image_width - 1);
-        auto v = (j + Utils::Random()) / (image_height - 1);
-        Ray ray = camera.GetRay(u, v);
-        pixel_color += RayColor(ray, world, max_depth);
-      }
-
-      Color average_color = pixel_color / samples_per_pixel;
-      std::cout << average_color << std::endl;
-    }
-  }
+  renderer.Render(image);
+  std::cout << image;
 
   return 0;
 }

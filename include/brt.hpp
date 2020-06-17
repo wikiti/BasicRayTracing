@@ -5,7 +5,6 @@
 #include <limits>
 #include <memory>
 
-
 #include "brt/hittables/hit_info.hpp"
 #include "brt/hittables/hittable.hpp"
 #include "brt/hittables/hittable_list.hpp"
@@ -16,6 +15,10 @@
 #include "brt/materials/lambertian.hpp"
 #include "brt/materials/material.hpp"
 #include "brt/materials/metal.hpp"
+
+#include "brt/render/image.hpp"
+#include "brt/render/pixel.hpp"
+#include "brt/render/renderer.hpp"
 
 #include "brt/camera.hpp"
 #include "brt/color.hpp"
