@@ -46,6 +46,16 @@ namespace BRT
       return false;
     }
 
+    bool MovingSphere::CalculateBoundingBox(double t0, double t1, BoundingBox& out) const
+    {
+      auto offset = Vector3(radius, radius, radius);
+      BoundingBox from = BoundingBox(Center(t0) - offset, Center(t0) + offset);
+      BoundingBox to = BoundingBox(Center(t1) - offset, Center(t1) + offset);
+
+      out = BoundingBox::Surrounding(from, to);
+      return true;
+    }
+
     bool MovingSphere::TryHit(const Ray& ray, double t, double t_min, double t_max, HitInfo& hit_info) const
     {
       if (t <= t_min || t >= t_max)

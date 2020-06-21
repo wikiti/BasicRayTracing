@@ -12,7 +12,7 @@ namespace BRT
     class HittableList : public Hittable
     {
       public:
-        
+
         HittableList();
         HittableList(std::shared_ptr<Hittable>);
 
@@ -20,6 +20,8 @@ namespace BRT
         void Add(std::shared_ptr<Hittable>);
 
         virtual bool Hit(const Ray&, double t_min, double t_max, HitInfo&) const;
+
+        virtual bool CalculateBoundingBox(double t0, double t1, BoundingBox& out) const;
 
       private:
 

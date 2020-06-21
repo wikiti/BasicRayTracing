@@ -40,5 +40,29 @@ namespace BRT
 
       return hit_anything;
     }
+
+    bool HittableList::CalculateBoundingBox(double t0, double t1, BoundingBox& out) const
+    {
+      if (items.empty())
+      {
+        return false;
+      }
+
+      BoundingBox temp;
+      bool first = true;
+
+      for (const auto& item : items)
+      {
+        if (!item->CalculateBoundingBox(t0, t1, temp))
+        {
+          return false;
+        }
+
+        out = first ? temp : BoundingBox::Surrounding(temp, out);
+        first = false;
+      }
+
+      return true;
+    }
   }
 }

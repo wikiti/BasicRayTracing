@@ -21,7 +21,9 @@ namespace BRT
         double Radius() const;
 
         virtual bool Hit(const Ray&, double t_min, double t_max, HitInfo&) const;
-      
+
+        virtual bool CalculateBoundingBox(double t0, double t1, BoundingBox& out) const;
+
       private:
 
         bool TryHit(const Ray&, double t, double t_min, double t_max, HitInfo&) const;

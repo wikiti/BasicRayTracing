@@ -51,5 +51,18 @@ namespace BRT
 
       return true;
     }
+
+    BoundingBox BoundingBox::Surrounding(const BoundingBox& a, const BoundingBox& b)
+    {
+      Point3 from(std::fmin(a.From().X(), b.From().X()),
+                  std::fmin(a.From().Y(), b.From().Y()),
+                  std::fmin(a.From().Z(), b.From().Z()));
+
+      Point3 to(std::fmax(a.To().X(), b.To().X()),
+                std::fmax(a.To().Y(), b.To().Z()),
+                std::fmax(a.To().Z(), b.To().Z()));
+
+      return BoundingBox(from, to);
+    }
   }
 }

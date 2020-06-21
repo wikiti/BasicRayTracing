@@ -14,7 +14,7 @@ namespace BRT
       private:
 
         Color albedo;
-      
+
       public:
 
         Lambertian(const Color&);

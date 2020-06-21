@@ -26,7 +26,7 @@ namespace BRT
   {
     return min + (max - min) * Random();
   }
-  
+
   Vector3 Utils::RandomInUnitSphere()
   {
     while (true)
@@ -38,7 +38,7 @@ namespace BRT
       }
     }
   }
-  
+
   Vector3 Utils::RandomInUnitDisk()
   {
     return RandomInUnitSphere() * Vector3(1, 1, 0);

@@ -6,6 +6,16 @@ namespace BRT {
                                           time_start(time_start), time_end(time_end)
   {}
 
+  const Point3& MovingPoint3::From() const
+  {
+    return from;
+  }
+
+  const Point3& MovingPoint3::To() const
+  {
+    return to;
+  }
+
   Point3 MovingPoint3::At(double time) const
   {
     return from + ((time - time_start) / (time_end - time_start)) * (from - to);

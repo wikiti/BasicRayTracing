@@ -15,7 +15,7 @@ namespace BRT
 
         Color albedo;
         double fuzz;
-      
+
       public:
 
         Metal(const Color&, double);

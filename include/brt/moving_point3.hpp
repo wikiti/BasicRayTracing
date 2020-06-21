@@ -15,6 +15,8 @@ namespace BRT
 
       MovingPoint3(const Point3& from, const Point3& to, double time_start, double time_end);
 
+      const Point3& From() const;
+      const Point3& To() const;
       Point3 At(double time) const;
   };
 }

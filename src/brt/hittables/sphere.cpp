@@ -57,6 +57,13 @@ namespace BRT
       return false;
     }
 
+    bool Sphere::CalculateBoundingBox(double t0, double t1, BoundingBox& out) const
+    {
+      auto offset = Vector3(radius, radius, radius);
+      out = BoundingBox(center - offset, center + offset);
+      return true;
+    }
+
     bool Sphere::TryHit(const Ray& ray, double t, double t_min, double t_max, HitInfo& hit_info) const
     {
       if (t <= t_min || t >= t_max)

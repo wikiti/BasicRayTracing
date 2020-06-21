@@ -14,7 +14,7 @@ namespace BRT
       private:
 
         double refraction_index;
-      
+
       public:
 
         Dielectric(double);

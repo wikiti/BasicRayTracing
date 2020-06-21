@@ -23,6 +23,8 @@ namespace BRT
         Point3 To() const;
 
         bool Hit(const Ray& ray, double tmin, double tmax) const;
+
+        static BoundingBox Surrounding(const BoundingBox& a, const BoundingBox& b);
     };
   }
 }
