@@ -29,19 +29,23 @@ namespace BRT
     bool BoundingBox::Hit(const Ray& ray, double tmin, double tmax) const
     {
       // Check if colliding planes (X,Y,Z) overlap
-      for (int plane = 0; plane < 3; ++plane)
+      for (int axis = 0; axis < 3; ++axis)
       {
-        auto t0 = std::fmin((from[plane] - ray.Origin()[plane]) / ray.Direction()[plane],
-                            (to[plane] - ray.Origin()[plane]) / ray.Direction()[plane]);
-        auto t1 = std::fmax((from[plane] - ray.Origin()[plane]) / ray.Direction()[plane],
-                            (to[plane] - ray.Origin()[plane]) / ray.Direction()[plane]);
+        auto inverseDirection = 1.0f / ray.Direction()[axis];
+        auto t0 = (From()[axis] - ray.Origin()[axis]) * inverseDirection;
+        auto t1 = (To()[axis] - ray.Origin()[axis]) * inverseDirection;
 
-        tmin = std::fmax(t0, tmin);
-        tmax = std::fmin(t1, tmax);
+        if (inverseDirection < 0.0f)
+        {
+          std::swap(t0, t1);
+        }
+
+        tmin = t0 > tmin ? t0 : tmin;
+        tmax = t1 < tmax ? t1 : tmax;
 
         if (tmax <= tmin)
         {
-          return false;
+            return false;
         }
       }
 
