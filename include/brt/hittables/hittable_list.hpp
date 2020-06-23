@@ -15,6 +15,10 @@ namespace BRT
 
         HittableList();
         HittableList(std::shared_ptr<Hittable>);
+        HittableList(const HittableList&);
+
+        std::vector<std::shared_ptr<Hittable>>& Items();
+        unsigned int Size();
 
         void Clear();
         void Add(std::shared_ptr<Hittable>);

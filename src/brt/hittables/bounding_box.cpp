@@ -59,7 +59,7 @@ namespace BRT
                   std::fmin(a.From().Z(), b.From().Z()));
 
       Point3 to(std::fmax(a.To().X(), b.To().X()),
-                std::fmax(a.To().Y(), b.To().Z()),
+                std::fmax(a.To().Y(), b.To().Y()),
                 std::fmax(a.To().Z(), b.To().Z()));
 
       return BoundingBox(from, to);

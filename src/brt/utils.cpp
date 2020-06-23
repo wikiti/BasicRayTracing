@@ -13,7 +13,7 @@ namespace BRT
     return degrees * Pi / 180;
   }
 
-
+  // Random int between [0, 1)
   double Utils::Random()
   {
     static std::uniform_real_distribution<double> distribution(0.0, 1.0);
@@ -22,16 +22,23 @@ namespace BRT
     return distribution(generator);
   }
 
-  double Utils::Random(double max, double min)
+  // Random int between [min, max)
+  double Utils::Random(double min, double max)
   {
     return min + (max - min) * Random();
+  }
+
+  // Random int between [min, max)
+  int Utils::Random(int min, int max)
+  {
+    return static_cast<int>(min + (max - min) * Random());
   }
 
   Vector3 Utils::RandomInUnitSphere()
   {
     while (true)
     {
-      auto point = Vector3::Random(-1, 1);
+      auto point = Vector3::Random(-1.0, 1.0);
       if (point.LengthSquared() < 1)
       {
         return point;
@@ -54,8 +61,8 @@ namespace BRT
   Vector3 Utils::RandomUnitVector()
   {
     // NOTE: Very similar to RandomUnitSphere().Normalize();
-    auto a = Random(0, 2 * Pi);
-    auto z = Random(-1, 1);
+    auto a = Random(0.0, 2 * Pi);
+    auto z = Random(-1.0, 1.0);
     auto r = std::sqrt(1 - z * z);
     return Vector3(r*std::cos(a), r*std::sin(a), z);
   }

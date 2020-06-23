@@ -12,6 +12,21 @@ namespace BRT
       Add(item);
     }
 
+    HittableList::HittableList(const HittableList& list)
+    {
+      items = list.items;
+    }
+
+    std::vector<std::shared_ptr<Hittable>>& HittableList::Items()
+    {
+      return items;
+    }
+
+    unsigned int HittableList::Size()
+    {
+      return items.size();
+    }
+
     void HittableList::Clear()
     {
       items.clear();

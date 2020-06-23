@@ -15,6 +15,7 @@ namespace BRT
 
       static double Random();
       static double Random(double, double);
+      static int Random(int, int);
       static Vector3 RandomInUnitSphere();
       static Vector3 RandomInUnitDisk();
       static Vector3 RandomInHemisphere(const Vector3&);

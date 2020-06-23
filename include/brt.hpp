@@ -6,6 +6,7 @@
 #include <memory>
 
 #include "brt/hittables/bounding_box.hpp"
+#include "brt/hittables/bvh_node.hpp"
 #include "brt/hittables/hit_info.hpp"
 #include "brt/hittables/hittable.hpp"
 #include "brt/hittables/hittable_list.hpp"

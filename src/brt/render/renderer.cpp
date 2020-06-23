@@ -86,8 +86,8 @@ namespace BRT
 
       for (int k = 0; k < samples_per_pixel; ++k)
       {
-        auto u = (pixel.X() + Utils::Random()) / (image.Width() - 1);
-        auto v = (pixel.Y() + Utils::Random()) / (image.Height() - 1);
+        auto u = ((double)pixel.X() + Utils::Random()) / (image.Width() - 1);
+        auto v = ((double)pixel.Y() + Utils::Random()) / (image.Height() - 1);
         Ray ray = camera.GetRay(u, v);
         pixel_color += RayColor(ray, max_depth);
       }
