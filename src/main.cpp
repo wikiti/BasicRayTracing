@@ -12,6 +12,7 @@ using BRT::Materials::Dielectric;
 using BRT::Materials::Lambertian;
 using BRT::Materials::Material;
 using BRT::Materials::Metal;
+using BRT::Textures::SolidColor;
 using BRT::MovingPoint3;
 using BRT::Point3;
 using BRT::Render::Image;
@@ -23,7 +24,7 @@ std::shared_ptr<Hittable> BuildWorld(double t0, double t1)
 {
   HittableList world;
 
-  auto ground_material = std::make_shared<Lambertian>(Color(0.5, 0.5, 0.5));
+  auto ground_material = std::make_shared<Lambertian>(std::make_shared<SolidColor>(0.5, 0.5, 0.5));
   world.Add(std::make_shared<Sphere>(Point3(0,-1000,0), 1000, ground_material));
 
   for (int a = -11; a < 11; ++a)
@@ -39,7 +40,7 @@ std::shared_ptr<Hittable> BuildWorld(double t0, double t1)
 
               if (choose_mat < 0.8) // diffuse
               {
-                auto albedo = Color::Random() * Color::Random();
+                auto albedo = std::make_shared<SolidColor>(Color::Random() * Color::Random());
                 sphere_material = std::make_shared<Lambertian>(albedo);
                 MovingPoint3 moving_center(
                   center, center + Vector3(0, Utils::Random(0.0, 0.5), 0),
@@ -66,7 +67,7 @@ std::shared_ptr<Hittable> BuildWorld(double t0, double t1)
   auto material1 = std::make_shared<Dielectric>(1.5);
   world.Add(std::make_shared<Sphere>(Point3(0, 1, 0), 1.0, material1));
 
-  auto material2 = std::make_shared<Lambertian>(Color(0.4, 0.2, 0.1));
+  auto material2 = std::make_shared<Lambertian>(std::make_shared<SolidColor>(0.4, 0.2, 0.1));
   world.Add(std::make_shared<Sphere>(Point3(-4, 1, 0), 1.0, material2));
 
   auto material3 = std::make_shared<Metal>(Color(0.7, 0.6, 0.5), 0.0);

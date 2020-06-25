@@ -1,6 +1,7 @@
 #include <cmath>
 
 #include "brt/hittables/moving_sphere.hpp"
+#include "brt/utils.hpp"
 
 namespace BRT
 {
@@ -66,6 +67,7 @@ namespace BRT
       hit_info.distance = t;
       hit_info.point = ray.At(hit_info.distance);
       hit_info.material_ptr = material_ptr;
+      Utils::SphereUV((hit_info.point - Center(ray.Time())) / radius, hit_info.u, hit_info.v);
       Vector3 outward_normal = (hit_info.point - Center(ray.Time())) / radius;
       hit_info.SetFaceNormal(ray, outward_normal);
       return true;

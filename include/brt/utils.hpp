@@ -21,7 +21,9 @@ namespace BRT
       static Vector3 RandomInHemisphere(const Vector3&);
       static Vector3 RandomUnitVector();
 
+      static void SphereUV(const Vector3& point, double& u, double& v);
+
       static double Clamp(double, double, double);
-      static Vector3 Clamp(Vector3, double, double);
+      static Vector3 Clamp(const Vector3&, double, double);
   };
 }

@@ -29,6 +29,7 @@ namespace BRT
         Point3 point;
         Vector3 normal;
         double distance;
+        double u, v;
         bool front_face;
         std::shared_ptr<Materials::Material> material_ptr;
     };

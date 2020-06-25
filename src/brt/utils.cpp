@@ -67,6 +67,15 @@ namespace BRT
     return Vector3(r*std::cos(a), r*std::sin(a), z);
   }
 
+  // https://en.wikipedia.org/wiki/UV_mapping#Finding_UV_on_a_sphere
+  void Utils::SphereUV(const Vector3& point, double& u, double& v)
+  {
+    Vector3 d = -point;
+
+    u = 0.5 + std::atan2(d.X(), d.Z()) / (2 * Pi);
+    v = 0.5 - std::asin(d.Y()) / Pi;
+  }
+
   double Utils::Clamp(double x, double min, double max)
   {
     if ( x < min)
@@ -81,7 +90,7 @@ namespace BRT
     return x;
   }
 
-  Vector3 Utils::Clamp(Vector3 u, double min, double max)
+  Vector3 Utils::Clamp(const Vector3& u, double min, double max)
   {
     return Vector3(Clamp(u.X(), min, max), Clamp(u.Y(), min, max), Clamp(u.Z(), min, max));
   }
