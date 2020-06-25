@@ -12,7 +12,7 @@ using BRT::Materials::Dielectric;
 using BRT::Materials::Lambertian;
 using BRT::Materials::Material;
 using BRT::Materials::Metal;
-using BRT::Textures::Checker;
+using BRT::Textures::Noise;
 using BRT::Textures::SolidColor;
 using BRT::MovingPoint3;
 using BRT::Point3;
@@ -23,14 +23,10 @@ using BRT::Vector3;
 
 std::shared_ptr<Hittable> BuildWorld()
 {
-  auto checker = std::make_shared<Checker>(
-    std::make_shared<SolidColor>(0.2, 0.3, 0.1),
-    std::make_shared<SolidColor>(0.9, 0.9, 0.9)
-  );
-
+  auto tex = std::make_shared<Noise>();
   auto items = std::make_shared<HittableList>();
-  items->Add(std::make_shared<Sphere>(Point3(0,-10, 0), 10, std::make_shared<Lambertian>(checker)));
-  items->Add(std::make_shared<Sphere>(Point3(0, 10, 0), 10, std::make_shared<Lambertian>(checker)));
+  items->Add(std::make_shared<Sphere>(Point3(0,-1000,0), 1000, std::make_shared<Lambertian>(tex)));
+  items->Add(std::make_shared<Sphere>(Point3(0, 2, 0), 2, std::make_shared<Lambertian>(tex)));
   return items;
 }
 

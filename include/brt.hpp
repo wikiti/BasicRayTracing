@@ -18,11 +18,14 @@
 #include "brt/materials/material.hpp"
 #include "brt/materials/metal.hpp"
 
+#include "brt/misc/perlin.hpp"
+
 #include "brt/render/image.hpp"
 #include "brt/render/pixel.hpp"
 #include "brt/render/renderer.hpp"
 
 #include "brt/textures/checker.hpp"
+#include "brt/textures/noise.hpp"
 #include "brt/textures/solid_color.hpp"
 #include "brt/textures/texture.hpp"
 
