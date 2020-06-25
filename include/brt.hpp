@@ -22,8 +22,9 @@
 #include "brt/render/pixel.hpp"
 #include "brt/render/renderer.hpp"
 
-#include "brt/textures/texture.hpp"
+#include "brt/textures/checker.hpp"
 #include "brt/textures/solid_color.hpp"
+#include "brt/textures/texture.hpp"
 
 #include "brt/camera.hpp"
 #include "brt/color.hpp"

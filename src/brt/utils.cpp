@@ -74,6 +74,12 @@ namespace BRT
 
     u = 0.5 + std::atan2(d.X(), d.Z()) / (2 * Pi);
     v = 0.5 - std::asin(d.Y()) / Pi;
+
+    // auto phi = std::atan2(point.Z(), point.X());
+    // auto theta = std::asin(point.Y());
+
+    // u = 1 - (phi + Pi) / 2 * Pi;
+    // v = (theta + Pi / 2) / Pi;
   }
 
   double Utils::Clamp(double x, double min, double max)
