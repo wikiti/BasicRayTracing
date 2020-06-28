@@ -64,6 +64,22 @@ namespace BRT
       return Utils::TrilinearInterpolation(c, u, v, w);
     }
 
+    double Perlin::Turbulence(const Point3& point, int depth) const
+    {
+      auto accumulator = 0.0;
+      auto temporary_point = point;
+      auto weight = 1.0;
+
+      for (int i = 0; i < depth; ++i)
+      {
+        accumulator += weight * Noise(temporary_point);
+        weight *= 0.5;
+        temporary_point *= 2;
+      }
+
+      return std::fabs(accumulator);
+    }
+
     int* Perlin::GeneratePermutation()
     {
       auto permutation = new int[PointCount];

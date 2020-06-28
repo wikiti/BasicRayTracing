@@ -13,7 +13,7 @@ namespace BRT
 
     Color Noise::Value(double u, double v, const Point3& point) const
     {
-      return Color(1, 1, 1) * Utils::Remap(perlin.Noise(scale * point), -1, 1, 0, 1);
+      return Color(1, 1, 1) * perlin.Turbulence(scale * point);
     }
   }
 }

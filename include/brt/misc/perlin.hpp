@@ -15,6 +15,7 @@ namespace BRT
         ~Perlin();
 
         double Noise(const Point3&) const;
+        double Turbulence(const Point3&, int depth = 7) const;
       
       private:
 
