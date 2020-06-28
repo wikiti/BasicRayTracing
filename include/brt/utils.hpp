@@ -23,6 +23,8 @@ namespace BRT
 
       static void SphereUV(const Vector3& point, double& u, double& v);
 
+      static double TrilinearInterpolation(double c[2][2][2], double u, double v, double w);
+
       static double Clamp(double, double, double);
       static Vector3 Clamp(const Vector3&, double, double);
   };

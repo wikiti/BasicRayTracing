@@ -74,12 +74,25 @@ namespace BRT
 
     u = 0.5 + std::atan2(d.X(), d.Z()) / (2 * Pi);
     v = 0.5 - std::asin(d.Y()) / Pi;
+  }
 
-    // auto phi = std::atan2(point.Z(), point.X());
-    // auto theta = std::asin(point.Y());
+  double Utils::TrilinearInterpolation(double c[2][2][2], double u, double v, double w)
+  {
+    auto accumulator = 0.0;
 
-    // u = 1 - (phi + Pi) / 2 * Pi;
-    // v = (theta + Pi / 2) / Pi;
+    for (int i = 0; i < 2; ++i)
+    {
+      for (int j = 0; j < 2; ++j)
+      {
+        for (int k = 0; k < 2; ++k)
+        {
+          accumulator += (i*u + (1 - i) * (1 - u)) * (j*v + (1 - j) * (1 - v)) *
+                         (k*w + (1 - k) * (1 - w)) * c[i][j][k];
+        }
+      }
+    }
+
+    return accumulator;
   }
 
   double Utils::Clamp(double x, double min, double max)

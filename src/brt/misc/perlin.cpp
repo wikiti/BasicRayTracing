@@ -36,11 +36,28 @@ namespace BRT
       auto v = point.Y() - std::floor(point.Y());
       auto w = point.Z() - std::floor(point.Z());
 
-      auto i = static_cast<int>(4 * point.X()) & 255;
-      auto j = static_cast<int>(4 * point.Y()) & 255;
-      auto k = static_cast<int>(4 * point.Z()) & 255;
+      int i = std::floor(point.X());
+      int j = std::floor(point.Y());
+      int k = std::floor(point.Z());
 
-      return random_float[permutation_x[i] ^ permutation_y[j] ^ permutation_z[k]];
+      double c[2][2][2];
+
+      for (int di = 0; di < 2; ++di)
+      {
+        for (int dj = 0; dj < 2; ++dj)
+        {
+          for (int dk = 0; dk < 2; ++dk)
+          {
+            c[di][dj][dk] = random_float[
+              permutation_x[(i+di) & 255] ^
+              permutation_y[(j+dj) & 255] ^
+              permutation_z[(k+dk) & 255]
+            ];
+          }
+        }
+      }
+
+      return Utils::TrilinearInterpolation(c, u, v, w);
     }
 
     int* Perlin::GeneratePermutation()
