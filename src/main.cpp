@@ -23,7 +23,7 @@ using BRT::Vector3;
 
 std::shared_ptr<Hittable> BuildWorld()
 {
-  auto tex = std::make_shared<Noise>();
+  auto tex = std::make_shared<Noise>(3.0);
   auto items = std::make_shared<HittableList>();
   items->Add(std::make_shared<Sphere>(Point3(0,-1000,0), 1000, std::make_shared<Lambertian>(tex)));
   items->Add(std::make_shared<Sphere>(Point3(0, 2, 0), 2, std::make_shared<Lambertian>(tex)));

@@ -12,10 +12,12 @@ namespace BRT
       private:
 
         Misc::Perlin perlin;
+        double scale;
 
       public:
 
         Noise();
+        Noise(double scale);
 
         virtual Color Value(double u, double v, const Point3& point) const;
     };
