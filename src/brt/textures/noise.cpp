@@ -1,3 +1,5 @@
+#include <cmath>
+
 #include "brt/textures/noise.hpp"
 #include "brt/utils.hpp"
 
@@ -13,7 +15,10 @@ namespace BRT
 
     Color Noise::Value(double u, double v, const Point3& point) const
     {
-      return Color(1, 1, 1) * perlin.Turbulence(scale * point);
+      return Color(1, 1, 1) *
+        Utils::Remap(std::sin(scale * point.Z() + 10 * perlin.Turbulence(scale * point)),
+                     -1.0, 1.0,
+                     0.0, 1.0);
     }
   }
 }
