@@ -60,6 +60,7 @@ namespace BRT
       friend Vector3 operator+(double, const Vector3&);
       friend Vector3 operator+(const Vector3&, double);
       friend Vector3 operator-(const Vector3&, const Vector3&);
+      friend Vector3 operator-(const Vector3&, double);
       friend Vector3 operator*(const Vector3&, const Vector3&);
       friend Vector3 operator*(double, const Vector3&);
       friend Vector3 operator*(const Vector3&, double);

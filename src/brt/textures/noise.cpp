@@ -1,4 +1,5 @@
 #include "brt/textures/noise.hpp"
+#include "brt/utils.hpp"
 
 namespace BRT
 {
@@ -12,7 +13,7 @@ namespace BRT
 
     Color Noise::Value(double u, double v, const Point3& point) const
     {
-      return Color(1, 1, 1) * perlin.Noise(scale * point);
+      return Color(1, 1, 1) * Utils::Remap(perlin.Noise(scale * point), -1, 1, 0, 1);
     }
   }
 }

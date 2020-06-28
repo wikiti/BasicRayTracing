@@ -1,6 +1,7 @@
 #pragma once
 
 #include "brt/point3.hpp"
+#include "brt/vector3.hpp"
 
 namespace BRT
 {
@@ -24,7 +25,7 @@ namespace BRT
 
         static const int PointCount;
 
-        double* random_float;
+        Vector3* random_vectors;
         int* permutation_x;
         int* permutation_y;
         int* permutation_z;

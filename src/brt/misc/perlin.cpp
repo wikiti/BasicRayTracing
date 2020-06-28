@@ -11,10 +11,10 @@ namespace BRT
 
     Perlin::Perlin()
     {
-      random_float = new double[PointCount];
+      random_vectors = new Vector3[PointCount];
       for (int i = 0; i < PointCount; ++i)
       {
-        random_float[i] = Utils::Random();
+        random_vectors[i] = Vector3::Random(-1.0, 1.0).Normalize();
       }
 
       permutation_x = GeneratePermutation();
@@ -24,7 +24,7 @@ namespace BRT
 
     Perlin::~Perlin()
     {
-      delete[] random_float;
+      delete[] random_vectors;
       delete[] permutation_x;
       delete[] permutation_y;
       delete[] permutation_z;
@@ -44,7 +44,7 @@ namespace BRT
       int j = std::floor(point.Y());
       int k = std::floor(point.Z());
 
-      double c[2][2][2];
+      Vector3 c[2][2][2];
 
       for (int di = 0; di < 2; ++di)
       {
@@ -52,7 +52,7 @@ namespace BRT
         {
           for (int dk = 0; dk < 2; ++dk)
           {
-            c[di][dj][dk] = random_float[
+            c[di][dj][dk] = random_vectors[
               permutation_x[(i+di) & 255] ^
               permutation_y[(j+dj) & 255] ^
               permutation_z[(k+dk) & 255]

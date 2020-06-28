@@ -159,6 +159,11 @@ namespace BRT {
     return Vector3(u.X() - v.X(), u.Y() - v.Y(), u.Z() - v.Z());
   }
 
+  Vector3 operator-(const Vector3& v, double t)
+  {
+    return Vector3(v.X() - t, v.Y() - t, v.Z() - t);
+  }
+
   Vector3 operator*(const Vector3& u, const Vector3& v)
   {
       return Vector3(u.X() * v.X(), u.Y() * v.Y(), u.Z() * v.Z());

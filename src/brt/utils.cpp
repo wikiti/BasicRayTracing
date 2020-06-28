@@ -76,9 +76,12 @@ namespace BRT
     v = 0.5 - std::asin(d.Y()) / Pi;
   }
 
-  double Utils::TrilinearInterpolation(double c[2][2][2], double u, double v, double w)
+  double Utils::TrilinearInterpolation(Vector3 c[2][2][2], double u, double v, double w)
   {
     auto accumulator = 0.0;
+    auto uu = u * u * (3 - 2 * u);
+    auto vv = v * v * (3 - 2 * v);
+    auto ww = w * w * (3 - 2 * w);
 
     for (int i = 0; i < 2; ++i)
     {
@@ -86,8 +89,9 @@ namespace BRT
       {
         for (int k = 0; k < 2; ++k)
         {
-          accumulator += (i*u + (1 - i) * (1 - u)) * (j*v + (1 - j) * (1 - v)) *
-                         (k*w + (1 - k) * (1 - w)) * c[i][j][k];
+          Vector3 weight(u - i, v - j, w - k);
+          accumulator += (i * uu + (1 - i) * (1 - uu)) * (j * vv + (1 - j) * (1 - vv)) *
+                         (k * ww + (1 - k) * (1 - ww)) * Vector3::Dot(c[i][j][k], weight);
         }
       }
     }
@@ -112,5 +116,16 @@ namespace BRT
   Vector3 Utils::Clamp(const Vector3& u, double min, double max)
   {
     return Vector3(Clamp(u.X(), min, max), Clamp(u.Y(), min, max), Clamp(u.Z(), min, max));
+  }
+
+  double Utils::Remap(double in, double in_min, double in_max, double out_min, double out_max)
+  {
+    return out_min + (out_max - out_min) * (in - in_min) / (in_max - in_min);
+  }
+
+  Vector3 Utils::Remap(const Vector3& in, double in_min, double in_max,
+    double out_min, double out_max)
+  {
+    return out_min + (out_max - out_min) * (in - in_min) / (in_max - in_min);
   }
 }
