@@ -36,6 +36,10 @@ namespace BRT
       auto v = point.Y() - std::floor(point.Y());
       auto w = point.Z() - std::floor(point.Z());
 
+      u = u * u * (3 - 2 * u);
+      v = v * v * (3 - 2 * v);
+      w = w * w * (3 - 2 * w);
+
       int i = std::floor(point.X());
       int j = std::floor(point.Y());
       int k = std::floor(point.Z());
