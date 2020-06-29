@@ -4,9 +4,9 @@
 #include <mutex>
 #include <queue>
 
-#include "brt/camera.hpp"
 #include "brt/hittables/hittable.hpp"
 #include "brt/progress.hpp"
+#include "brt/render/camera.hpp"
 #include "brt/render/image.hpp"
 
 namespace BRT

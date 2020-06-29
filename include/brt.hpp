@@ -20,6 +20,7 @@
 
 #include "brt/misc/perlin.hpp"
 
+#include "brt/render/camera.hpp"
 #include "brt/render/image.hpp"
 #include "brt/render/pixel.hpp"
 #include "brt/render/renderer.hpp"
@@ -29,7 +30,6 @@
 #include "brt/textures/solid_color.hpp"
 #include "brt/textures/texture.hpp"
 
-#include "brt/camera.hpp"
 #include "brt/color.hpp"
 #include "brt/moving_point3.hpp"
 #include "brt/point3.hpp"
