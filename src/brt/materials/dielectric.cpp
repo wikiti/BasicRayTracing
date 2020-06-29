@@ -12,8 +12,8 @@ namespace BRT
     {}
 
     bool Dielectric::Scatter(const Ray& ray, const Hittables::HitInfo& hit_info, Color& attenuation,
-                             Ray& scattered) const {
-
+      Ray& scattered) const
+    {
       attenuation = Color(1.0, 1.0, 1.0);
       double refraction = hit_info.front_face ? 1.0 / refraction_index : refraction_index;
 

@@ -11,8 +11,8 @@ namespace BRT
     {}
 
     bool Metal::Scatter(const Ray& ray, const Hittables::HitInfo& hit_info, Color& attenuation,
-                             Ray& scattered) const {
-
+      Ray& scattered) const
+    {
       Vector3 reflected = Vector3::Reflect(ray.Direction().Normalize(), hit_info.normal);
       scattered = Ray(hit_info.point, reflected + fuzz * Utils::RandomInUnitSphere(), ray.Time());
       attenuation = albedo;

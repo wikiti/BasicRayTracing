@@ -13,6 +13,7 @@ namespace BRT
       public:
 
         virtual bool Scatter(const Ray&, const Hittables::HitInfo&, Color&, Ray&) const = 0;
+        virtual Color Emit(double u, double v, const Point3& p) const;
     };
   }
 }

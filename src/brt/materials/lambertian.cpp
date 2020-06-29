@@ -10,8 +10,8 @@ namespace BRT
     {}
 
     bool Lambertian::Scatter(const Ray& ray, const Hittables::HitInfo& hit_info, Color& attenuation,
-                             Ray& scattered) const {
-
+      Ray& scattered) const
+    {
       // Vector3 scatter_direction = hit_info.normal + Utils::RandomInHemisphere();
       Vector3 scatter_direction = hit_info.normal + Utils::RandomUnitVector();
       scattered = Ray(hit_info.point, scatter_direction, ray.Time());

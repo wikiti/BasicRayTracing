@@ -10,12 +10,6 @@ namespace BRT
 {
   namespace Render
   {
-    // Camera camera;
-    // std::shared_ptr<Hittables::Hittable> world;
-
-    // std::queue<int> pixelQueue;
-    // std::mutex pixelQueueMutex;
-
     Renderer::Renderer(const Camera& camera, std::shared_ptr<Hittables::Hittable> world) :
       camera(camera), world(world)
     {}

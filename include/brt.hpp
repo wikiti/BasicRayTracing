@@ -14,6 +14,7 @@
 #include "brt/hittables/sphere.hpp"
 
 #include "brt/materials/dielectric.hpp"
+#include "brt/materials/diffuse_light.hpp"
 #include "brt/materials/lambertian.hpp"
 #include "brt/materials/material.hpp"
 #include "brt/materials/metal.hpp"
