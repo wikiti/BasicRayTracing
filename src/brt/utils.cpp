@@ -99,6 +99,20 @@ namespace BRT
     return accumulator;
   }
 
+  int Utils::Clamp(int x, int min, int max)
+  {
+    if ( x < min)
+    {
+      return min;
+    }
+    else if (x > max)
+    {
+      return max;
+    }
+
+    return x;
+  }
+
   double Utils::Clamp(double x, double min, double max)
   {
     if ( x < min)

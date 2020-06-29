@@ -25,6 +25,7 @@ namespace BRT
 
       static double TrilinearInterpolation(Vector3 c[2][2][2], double u, double v, double w);
 
+      static int Clamp(int, int, int);
       static double Clamp(double, double, double);
       static Vector3 Clamp(const Vector3&, double, double);
 

@@ -24,4 +24,5 @@ build/BasicRayTracing > output.ppm
 
 ## Resources
 
-- [Ray Tracing in One Weekend - The Book Series](https://raytracing.github.io/)
+- [Ray Tracing in One Weekend - The Book Series](https://raytracing.github.io/): the main tutorial
+- [stb](https://github.com/nothings/stb): header-only image library

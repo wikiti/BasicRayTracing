@@ -26,6 +26,7 @@
 #include "brt/render/renderer.hpp"
 
 #include "brt/textures/checker.hpp"
+#include "brt/textures/image.hpp"
 #include "brt/textures/noise.hpp"
 #include "brt/textures/solid_color.hpp"
 #include "brt/textures/texture.hpp"

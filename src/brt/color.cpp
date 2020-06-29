@@ -22,7 +22,7 @@ namespace BRT {
   std::ostream& operator<<(std::ostream& out, const Color& c)
   {
     // Fix values, and gamma-correct them
-    Color color = Vector3::Sqrt(Utils::Clamp(c, 0, 0.99));
+    Color color = Vector3::Sqrt(Utils::Clamp(c, 0.0, 0.99));
 
     return out << static_cast<int>(255 * color.R()) << ' '
                << static_cast<int>(255 * color.G()) << ' '

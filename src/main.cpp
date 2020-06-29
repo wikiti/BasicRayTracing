@@ -4,19 +4,12 @@ using namespace BRT;
 
 std::shared_ptr<Hittables::Hittable> BuildWorld()
 {
-  auto texture = std::make_shared<Textures::Noise>(4.0);
+  auto texture = std::make_shared<Textures::Image>("assets/earthmap.jpg");
   auto items = std::make_shared<Hittables::HittableList>();
 
   items->Add(
     std::make_shared<Hittables::Sphere>(
-      Point3(0, -1000, 0),
-      1000,
-      std::make_shared<Materials::Lambertian>(texture)
-    )
-  );
-  items->Add(
-    std::make_shared<Hittables::Sphere>(
-      Point3(0, 2, 0),
+      Point3(0, 0, 0),
       2,
       std::make_shared<Materials::Lambertian>(texture)
     )

@@ -6,7 +6,8 @@ namespace BRT
 {
   namespace Materials
   {
-    Metal::Metal(const Color& color, double fuzz) : albedo(color), fuzz(Utils::Clamp(fuzz, 0, 1))
+    Metal::Metal(const Color& color, double fuzz) : albedo(color),
+      fuzz(Utils::Clamp(fuzz, 0.0, 1.0))
     {}
 
     bool Metal::Scatter(const Ray& ray, const Hittables::HitInfo& hit_info, Color& attenuation,
