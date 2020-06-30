@@ -19,13 +19,15 @@ namespace BRT
 
         Camera camera;
         std::shared_ptr<Hittables::Hittable> world;
+        Color background;
 
         std::queue<int> pixel_queue;
         std::mutex pixel_queue_mutex;
 
       public:
 
-        Renderer(const Camera& camera, std::shared_ptr<Hittables::Hittable> world);
+        Renderer(const Camera& camera, std::shared_ptr<Hittables::Hittable> world,
+          const Color& background);
 
         void Render(Image& out, int samples_per_pixel = 100, int max_depth = 50, int threads = 4);
 

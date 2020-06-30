@@ -9,6 +9,7 @@ namespace BRT
   namespace Render
   {
     class Camera {
+
       public:
 
         Camera(Point3 look_from, Point3 look_at, Vector3 up, double aspect_ratio, double fov,

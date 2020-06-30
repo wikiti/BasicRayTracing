@@ -10,8 +10,8 @@ namespace BRT
 {
   namespace Render
   {
-    Renderer::Renderer(const Camera& camera, std::shared_ptr<Hittables::Hittable> world) :
-      camera(camera), world(world)
+    Renderer::Renderer(const Camera& camera, std::shared_ptr<Hittables::Hittable> world,
+      const Color& background) : camera(camera), world(world), background(background)
     {}
 
     void Renderer::Render(Image& out, int samples_per_pixel, int max_depth, int thread_count)
@@ -98,22 +98,21 @@ namespace BRT
 
       Hittables::HitInfo hit_info;
 
-      if (world->Hit(ray, hit_info))
+      if (!world->Hit(ray, hit_info))
       {
-        Ray scattered;
-        Color attenuation;
-
-        if (hit_info.material_ptr->Scatter(ray, hit_info, attenuation, scattered))
-        {
-          return attenuation * RayColor(scattered, depth - 1);
-        }
-
-        return Color(0, 0, 0);
+        return background;
       }
 
-      // Render background (sky)
-      auto t = 0.5 * (ray.Direction().Y() + 1.0);
-      return (1.0 - t) * Color(1.0, 1.0, 1.0) + t * Color(0.5, 0.7, 1.0);
+      Ray scattered;
+      Color attenuation;
+      Color emitted = hit_info.material_ptr->Emit(hit_info.u, hit_info.v, hit_info.point);
+
+      if (!hit_info.material_ptr->Scatter(ray, hit_info, attenuation, scattered))
+      {
+        return emitted;
+      }
+
+      return emitted + attenuation * RayColor(scattered, depth - 1);
     }
   }
 }

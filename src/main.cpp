@@ -4,16 +4,18 @@ using namespace BRT;
 
 std::shared_ptr<Hittables::Hittable> BuildWorld()
 {
-  auto texture = std::make_shared<Textures::Image>("assets/earthmap.jpg");
   auto items = std::make_shared<Hittables::HittableList>();
 
-  items->Add(
-    std::make_shared<Hittables::Sphere>(
-      Point3(0, 0, 0),
-      2,
-      std::make_shared<Materials::Lambertian>(texture)
-    )
-  );
+  auto perlin_texture = std::make_shared<Textures::Noise>(4);
+  auto perlin_material = std::make_shared<Materials::Lambertian>(perlin_texture);
+
+  items->Add(std::make_shared<Hittables::Sphere>(Point3(0, -1000, 0), 1000, perlin_material));
+  items->Add(std::make_shared<Hittables::Sphere>(Point3(0, 2, 0), 2, perlin_material));
+
+  auto light_texture = std::make_shared<Textures::SolidColor>(4, 4, 4);
+  auto light_material = std::make_shared<Materials::DiffuseLight>(light_texture);
+
+  items->Add(std::make_shared<Hittables::Sphere>(Point3(0, 7, 0), 2, light_material));
 
   return items;
 }
@@ -23,13 +25,19 @@ int main()
   const auto aspect_ratio = 16.0 / 9.0;
   const auto image_width = 384;
   const auto image_height = static_cast<int>(image_width / aspect_ratio);
+  const auto fov = 20.0;
+  const auto aperture = 0.0;
   const auto t0 = 0.0;
   const auto t1 = 1.0;
 
+  const Color background(0, 0, 0);
+  const Point3 look_from(30, 2, 3);
+  const Point3 look_to(0, 2, 0);
+
   std::shared_ptr<Hittables::Hittable> world = BuildWorld();
-  Render::Camera camera(Point3(13, 2, 3), Point3::Zero, Vector3::Up, aspect_ratio, 20, 0.0, t0, t1);
+  Render::Camera camera(look_from, look_to, Vector3::Up, aspect_ratio, fov, aperture, t0, t1);
   Render::Image image(image_width, image_height);
-  Render::Renderer renderer(camera, world);
+  Render::Renderer renderer(camera, world, background);
 
   renderer.Render(image);
   std::cout << image;
