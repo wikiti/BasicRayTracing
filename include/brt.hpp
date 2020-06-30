@@ -13,6 +13,7 @@
 #include "brt/hittables/hittable.hpp"
 #include "brt/hittables/hittable_list.hpp"
 #include "brt/hittables/moving_sphere.hpp"
+#include "brt/hittables/rotate.hpp"
 #include "brt/hittables/sphere.hpp"
 #include "brt/hittables/translate.hpp"
 
@@ -22,6 +23,7 @@
 #include "brt/materials/material.hpp"
 #include "brt/materials/metal.hpp"
 
+#include "brt/misc/axis.hpp"
 #include "brt/misc/perlin.hpp"
 #include "brt/misc/plane.hpp"
 

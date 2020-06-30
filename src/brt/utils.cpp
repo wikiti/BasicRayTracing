@@ -6,6 +6,7 @@
 namespace BRT
 {
   const double Utils::Infinity = std::numeric_limits<double>::infinity();
+  const double Utils::NegativeInfinity = -Utils::Infinity;
   const double Utils::Pi = 3.1415926535897932385;
   const double Utils::Epsilon = 0.0001;
 

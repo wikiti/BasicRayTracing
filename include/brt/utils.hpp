@@ -9,6 +9,7 @@ namespace BRT
     public:
 
       static const double Infinity;
+      static const double NegativeInfinity;
       static const double Pi;
       static const double Epsilon;
 

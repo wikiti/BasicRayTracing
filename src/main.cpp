@@ -28,8 +28,23 @@ std::shared_ptr<Hittables::Hittable> BuildWorld()
   items->Add(std::make_shared<Hittables::XYRectangle>(0, 555, 0, 555, 555, white));
 
   // Boxes
-  items->Add(std::make_shared<Hittables::Box>(Point3(130, 0, 65), Point3(295, 165, 230), white));
-  items->Add(std::make_shared<Hittables::Box>(Point3(265, 0, 295), Point3(430, 330, 460), white));
+  std::shared_ptr<Hittables::Hittable> box1 = std::make_shared<Hittables::Box>(
+    Point3::Zero,
+    Point3(165, 330, 165),
+    white
+  );
+  box1 = std::make_shared<Hittables::RotateY>(box1, 15);
+  box1 = std::make_shared<Hittables::Translate>(box1, Vector3(265, 0, 295));
+  items->Add(box1);
+
+  std::shared_ptr<Hittables::Hittable> box2 = std::make_shared<Hittables::Box>(
+    Point3::Zero,
+    Point3(165, 165, 165),
+    white
+  );
+  box2 = std::make_shared<Hittables::RotateY>(box2, -18);
+  box2 = std::make_shared<Hittables::Translate>(box2, Vector3(130, 0, 65));
+  items->Add(box2);
 
   return items;
 }

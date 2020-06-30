@@ -104,8 +104,8 @@ namespace BRT
     }
 
     // NOTE: Force template specialization implementation to avoid undefined errors
-    template class AxisAlignedRectangle<BRT::Misc::Plane::XY>;
-    template class AxisAlignedRectangle<BRT::Misc::Plane::XZ>;
-    template class AxisAlignedRectangle<BRT::Misc::Plane::YZ>;
+    template class AxisAlignedRectangle<Misc::Plane::XY>;
+    template class AxisAlignedRectangle<Misc::Plane::XZ>;
+    template class AxisAlignedRectangle<Misc::Plane::YZ>;
   }
 }
