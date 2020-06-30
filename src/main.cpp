@@ -19,12 +19,17 @@ std::shared_ptr<Hittables::Hittable> BuildWorld()
     std::make_shared<Textures::SolidColor>(15, 15, 15)
   );
 
+  // Walls, floor and ceiling
   items->Add(std::make_shared<Hittables::YZRectangle>(0, 555, 0, 555, 555, green));
   items->Add(std::make_shared<Hittables::YZRectangle>(0, 555, 0, 555, 0, red));
   items->Add(std::make_shared<Hittables::XZRectangle>(213, 343, 227, 332, 554, light));
   items->Add(std::make_shared<Hittables::XZRectangle>(0, 555, 0, 555, 0, white));
   items->Add(std::make_shared<Hittables::XZRectangle>(0, 555, 0, 555, 555, white));
   items->Add(std::make_shared<Hittables::XYRectangle>(0, 555, 0, 555, 555, white));
+
+  // Boxes
+  items->Add(std::make_shared<Hittables::Box>(Point3(130, 0, 65), Point3(295, 165, 230), white));
+  items->Add(std::make_shared<Hittables::Box>(Point3(265, 0, 295), Point3(430, 330, 460), white));
 
   return items;
 }

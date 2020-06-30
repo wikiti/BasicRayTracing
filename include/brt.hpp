@@ -7,6 +7,7 @@
 
 #include "brt/hittables/axis_aligned_rectangle.hpp"
 #include "brt/hittables/bounding_box.hpp"
+#include "brt/hittables/box.hpp"
 #include "brt/hittables/bvh_node.hpp"
 #include "brt/hittables/hit_info.hpp"
 #include "brt/hittables/hittable.hpp"
