@@ -22,7 +22,7 @@ namespace BRT
 
       Progress(std::ostream& ostream, int max);
 
-      int Percentage();
+      int Percentage() const;
       void Update(int new_value);
       void Increment(int by = 1);
 

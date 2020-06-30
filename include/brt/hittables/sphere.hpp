@@ -32,7 +32,7 @@ namespace BRT
 
         Point3 center;
         double radius;
-        std::shared_ptr<Materials::Material> material_ptr;
+        std::shared_ptr<Materials::Material> material;
     };
   }
 }

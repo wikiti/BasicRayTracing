@@ -4,3 +4,6 @@ build/
 
 # Editor
 .vscode/
+
+# Temporary
+tmp/

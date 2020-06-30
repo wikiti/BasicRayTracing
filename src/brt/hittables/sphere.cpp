@@ -10,8 +10,8 @@ namespace BRT
     Sphere::Sphere()
     {}
 
-    Sphere::Sphere(Point3 center, double radius, std::shared_ptr<Materials::Material> material_ptr) :
-      center(center), radius(radius), material_ptr(material_ptr)
+    Sphere::Sphere(Point3 center, double radius, std::shared_ptr<Materials::Material> material) :
+      center(center), radius(radius), material(material)
     {}
 
     Point3 Sphere::Center() const
@@ -74,7 +74,7 @@ namespace BRT
 
       hit_info.distance = t;
       hit_info.point = ray.At(hit_info.distance);
-      hit_info.material_ptr = material_ptr;
+      hit_info.material = material;
       Utils::SphereUV((hit_info.point - center) / radius, hit_info.u, hit_info.v);
       Vector3 outward_normal = (hit_info.point - center) / radius;
       hit_info.SetFaceNormal(ray, outward_normal);

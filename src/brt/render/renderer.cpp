@@ -105,9 +105,9 @@ namespace BRT
 
       Ray scattered;
       Color attenuation;
-      Color emitted = hit_info.material_ptr->Emit(hit_info.u, hit_info.v, hit_info.point);
+      Color emitted = hit_info.material->Emit(hit_info.u, hit_info.v, hit_info.point);
 
-      if (!hit_info.material_ptr->Scatter(ray, hit_info, attenuation, scattered))
+      if (!hit_info.material->Scatter(ray, hit_info, attenuation, scattered))
       {
         return emitted;
       }

@@ -5,6 +5,7 @@
 #include <limits>
 #include <memory>
 
+#include "brt/hittables/axis_aligned_rectangle.hpp"
 #include "brt/hittables/bounding_box.hpp"
 #include "brt/hittables/bvh_node.hpp"
 #include "brt/hittables/hit_info.hpp"
@@ -20,6 +21,7 @@
 #include "brt/materials/metal.hpp"
 
 #include "brt/misc/perlin.hpp"
+#include "brt/misc/plane.hpp"
 
 #include "brt/render/camera.hpp"
 #include "brt/render/image.hpp"

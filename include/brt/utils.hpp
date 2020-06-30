@@ -10,6 +10,7 @@ namespace BRT
 
       static const double Infinity;
       static const double Pi;
+      static const double Epsilon;
 
       static double DegreesToRadians(double);
 

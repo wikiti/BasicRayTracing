@@ -31,7 +31,7 @@ namespace BRT
     }
   }
 
-  int Progress::Percentage()
+  int Progress::Percentage() const
   {
     return (100 * current) / max;
   }

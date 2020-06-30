@@ -31,7 +31,7 @@ namespace BRT
         double distance;
         double u, v;
         bool front_face;
-        std::shared_ptr<Materials::Material> material_ptr;
+        std::shared_ptr<Materials::Material> material;
     };
   }
 }

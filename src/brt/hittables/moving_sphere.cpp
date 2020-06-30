@@ -8,9 +8,8 @@ namespace BRT
   namespace Hittables
   {
     MovingSphere::MovingSphere(const MovingPoint3& moving_center, double radius,
-      std::shared_ptr<Materials::Material> material_ptr) : moving_center(moving_center),
-                                                           radius(radius),
-                                                           material_ptr(material_ptr)
+      std::shared_ptr<Materials::Material> material) :
+      moving_center(moving_center), radius(radius), material(material)
     {}
 
     Point3 MovingSphere::Center(double time) const
@@ -66,7 +65,7 @@ namespace BRT
 
       hit_info.distance = t;
       hit_info.point = ray.At(hit_info.distance);
-      hit_info.material_ptr = material_ptr;
+      hit_info.material = material;
       Utils::SphereUV((hit_info.point - Center(ray.Time())) / radius, hit_info.u, hit_info.v);
       Vector3 outward_normal = (hit_info.point - Center(ray.Time())) / radius;
       hit_info.SetFaceNormal(ray, outward_normal);
