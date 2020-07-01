@@ -3,7 +3,6 @@
 #include <memory>
 
 #include "brt/hittables/hittable.hpp"
-#include "brt/materials/material.hpp"
 #include "brt/misc/axis.hpp"
 
 namespace BRT

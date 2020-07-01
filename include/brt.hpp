@@ -9,6 +9,7 @@
 #include "brt/hittables/bounding_box.hpp"
 #include "brt/hittables/box.hpp"
 #include "brt/hittables/bvh_node.hpp"
+#include "brt/hittables/constant_density_medium.hpp"
 #include "brt/hittables/hit_info.hpp"
 #include "brt/hittables/hittable.hpp"
 #include "brt/hittables/hittable_list.hpp"
@@ -19,6 +20,7 @@
 
 #include "brt/materials/dielectric.hpp"
 #include "brt/materials/diffuse_light.hpp"
+#include "brt/materials/isotropic.hpp"
 #include "brt/materials/lambertian.hpp"
 #include "brt/materials/material.hpp"
 #include "brt/materials/metal.hpp"

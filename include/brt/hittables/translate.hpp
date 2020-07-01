@@ -3,8 +3,6 @@
 #include <memory>
 
 #include "brt/hittables/hittable.hpp"
-#include "brt/point3.hpp"
-#include "brt/vector3.hpp"
 
 namespace BRT
 {

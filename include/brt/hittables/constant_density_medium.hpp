@@ -3,27 +3,24 @@
 #include <memory>
 
 #include "brt/hittables/hittable.hpp"
-#include "brt/hittables/hittable_list.hpp"
-#include "brt/materials/material.hpp"
 
 namespace BRT
 {
   namespace Hittables
   {
-    class Box : public Hittable
+    class ConstantDensityMedium : public Hittable
     {
       private:
 
-        Point3 from;
-        Point3 to;
-
-        HittableList sides;
+        std::shared_ptr<Hittable> boundary;
+        std::shared_ptr<Materials::Material> phase_function;
+        double density;
 
       public:
 
-        Box();
-        Box(const Point3& from, const Point3& to, std::shared_ptr<Materials::Material> material);
-
+        ConstantDensityMedium(std::shared_ptr<Hittable> boundary, double density,
+          std::shared_ptr<Materials::Material> phase_function);
+      
         virtual bool Hit(const Ray&, double t_min, double t_max, HitInfo&) const;
 
         virtual bool CalculateBoundingBox(double t0, double t1, BoundingBox& out) const;

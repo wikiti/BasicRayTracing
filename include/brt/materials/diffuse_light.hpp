@@ -2,11 +2,8 @@
 
 #include <memory>
 
-#include "brt/color.hpp"
-#include "brt/hittables/hit_info.hpp"
 #include "brt/materials/material.hpp"
 #include "brt/textures/texture.hpp"
-#include "brt/ray.hpp"
 
 namespace BRT
 {

@@ -15,6 +15,12 @@ std::shared_ptr<Hittables::Hittable> BuildWorld()
   auto green = std::make_shared<Materials::Lambertian>(
     std::make_shared<Textures::SolidColor>(.12, .45, .15)
   );
+  auto black_constant_medium = std::make_shared<Materials::Isotropic>(
+    std::make_shared<Textures::SolidColor>(0.0, 0.0, 0.0)
+  );
+  auto white_constant_medium = std::make_shared<Materials::Isotropic>(
+    std::make_shared<Textures::SolidColor>(1.0, 1.0, 1.0)
+  );
   auto light = std::make_shared<Materials::DiffuseLight>(
     std::make_shared<Textures::SolidColor>(15, 15, 15)
   );
@@ -35,6 +41,7 @@ std::shared_ptr<Hittables::Hittable> BuildWorld()
   );
   box1 = std::make_shared<Hittables::RotateY>(box1, 15);
   box1 = std::make_shared<Hittables::Translate>(box1, Vector3(265, 0, 295));
+  box1 = std::make_shared<Hittables::ConstantDensityMedium>(box1, 0.01, black_constant_medium);
   items->Add(box1);
 
   std::shared_ptr<Hittables::Hittable> box2 = std::make_shared<Hittables::Box>(
@@ -44,6 +51,7 @@ std::shared_ptr<Hittables::Hittable> BuildWorld()
   );
   box2 = std::make_shared<Hittables::RotateY>(box2, -18);
   box2 = std::make_shared<Hittables::Translate>(box2, Vector3(130, 0, 65));
+  box2 = std::make_shared<Hittables::ConstantDensityMedium>(box2, 0.01, white_constant_medium);
   items->Add(box2);
 
   return items;
@@ -52,7 +60,7 @@ std::shared_ptr<Hittables::Hittable> BuildWorld()
 int main()
 {
   const auto aspect_ratio = 16.0 / 9.0;
-  const auto image_width = 384;
+  const auto image_width = 400;
   const auto image_height = static_cast<int>(image_width / aspect_ratio);
   const auto fov = 40.0;
   const auto aperture = 0.0;
@@ -68,7 +76,7 @@ int main()
   Render::Image image(image_width, image_height);
   Render::Renderer renderer(camera, world, background);
 
-  renderer.Render(image);
+  renderer.Render(image, 200);
   std::cout << image;
 
   return 0;

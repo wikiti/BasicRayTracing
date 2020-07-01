@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 #include "brt/materials/material.hpp"
 #include "brt/textures/texture.hpp"
 
@@ -7,7 +9,7 @@ namespace BRT
 {
   namespace Materials
   {
-    class Lambertian : public Material
+    class Isotropic : public Material
     {
       private:
 
@@ -15,7 +17,7 @@ namespace BRT
 
       public:
 
-        Lambertian(std::shared_ptr<Textures::Texture>);
+        Isotropic(std::shared_ptr<Textures::Texture> albedo);
 
         virtual bool Scatter(const Ray&, const Hittables::HitInfo&, Color&, Ray&) const;
     };
