@@ -4,23 +4,26 @@
 
 using namespace BRT;
 
-inline double pdf(double x)
+inline double pdf(const Vector3 &p)
 {
-  return 3 * x * x / 8;
+  return 1.0 / (4 * Utils::Pi);
 }
 
 int main()
 {
-  int N = 1;
+  int N = 1000000;
   auto sum = 0.0;
+
   for (int i = 0; i < N; i++)
   {
-    auto x = std::pow(Utils::Random(0.0, 8.0), 1.0 / 3.0);
-    sum += x * x / pdf(x);
+    Vector3 d = Utils::RandomUnitVector();
+    auto cosine_squared = d.Z() * d.Z();
+    sum += cosine_squared / pdf(d);
   }
+
   std::cout << std::fixed << std::setprecision(12);
-  std::cout << "I   = " << sum / N << '\n';
-  std::cout << "8/3 = " << 8.0 / 3 << '\n';
+  std::cout << "I          = " << sum / N << '\n';
+  std::cout << "(4/3) * pi = " << (4.0 / 3) * Utils::Pi << '\n';
 
   return 0;
 }
