@@ -6,17 +6,23 @@ An implementation of a CPU Ray Tracing engine, created by following the "Ray Tra
 
 ## Build
 
-Use `cmake` and `make` to build the project:
+Use `cmake` (once) to configure de build:
+
 
 ```
 cd build
 cmake ..
+```
+
+and `make` to build (and rebuild) the project, on the `build/` directory:
+
+```
 make
 ```
 
 ## Usage
 
-Simply run the build executable, and place the output PPM on a file:
+Simply run the build executable (`build/BasicRayTracing`), and place the output (stdout) PPM on a file:
 
 ```
 build/BasicRayTracing > output.ppm

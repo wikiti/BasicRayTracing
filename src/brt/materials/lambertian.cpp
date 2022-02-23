@@ -1,4 +1,5 @@
 #include "brt/materials/lambertian.hpp"
+#include "brt/textures/solid_color.hpp"
 #include "brt/utils.hpp"
 #include "brt/vector3.hpp"
 
@@ -9,15 +10,30 @@ namespace BRT
     Lambertian::Lambertian(std::shared_ptr<Textures::Texture> texture) : albedo(texture)
     {}
 
-    bool Lambertian::Scatter(const Ray& ray, const Hittables::HitInfo& hit_info, Color& attenuation,
-      Ray& scattered) const
+    Lambertian::Lambertian(const Color& color) : albedo(std::make_shared<Textures::SolidColor>(color))
+    {}
+
+    bool Lambertian::Scatter(const Ray& ray, const Hittables::HitInfo& hit_info, Color& attenuation, Ray& scattered,
+                             double& pdf) const
     {
       // Vector3 scatter_direction = hit_info.normal + Utils::RandomInHemisphere();
       Vector3 scatter_direction = hit_info.normal + Utils::RandomUnitVector();
-      scattered = Ray(hit_info.point, scatter_direction, ray.Time());
+      if (scatter_direction.NearZero())
+      {
+        scatter_direction = hit_info.normal;
+      }
+
+      scattered = Ray(hit_info.point, scatter_direction.Normalize(), ray.Time());
       attenuation = albedo->Value(hit_info.u, hit_info.v, hit_info.point);
+      pdf = Vector3::Dot(hit_info.normal, scattered.Direction()) / Utils::Pi;
 
       return true;
+    }
+
+    double Lambertian::ScatteringPdf(const Ray& ray, const Hittables::HitInfo& hit_info, const Ray& scattered) const
+    {
+      auto cosine = Vector3::Dot(hit_info.normal, scattered.Direction().Normalize());
+      return cosine < 0 ? 0 : cosine / Utils::Pi;
     }
   }
 }

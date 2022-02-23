@@ -8,12 +8,13 @@ namespace BRT
 {
   namespace Render
   {
-    class Camera {
+    class Camera
+    {
 
       public:
 
-        Camera(Point3 look_from, Point3 look_at, Vector3 up, double aspect_ratio, double fov,
-          double aperture, double time_start = 0, double time_end = 0);
+        Camera(Point3 look_from, Point3 look_at, Vector3 up, double aspect_ratio, double fov, double aperture,
+               double time_start = 0, double time_end = 0);
 
         Ray GetRay(double, double) const;
 

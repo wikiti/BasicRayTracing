@@ -6,12 +6,11 @@ namespace BRT
 {
   namespace Materials
   {
-    Metal::Metal(const Color& color, double fuzz) : albedo(color),
-      fuzz(Utils::Clamp(fuzz, 0.0, 1.0))
+    Metal::Metal(const Color& color, double fuzz) : albedo(color), fuzz(Utils::Clamp(fuzz, 0.0, 1.0))
     {}
 
-    bool Metal::Scatter(const Ray& ray, const Hittables::HitInfo& hit_info, Color& attenuation,
-      Ray& scattered) const
+    bool Metal::Scatter(const Ray& ray, const Hittables::HitInfo& hit_info, Color& attenuation, Ray& scattered,
+                        double& pdf) const
     {
       Vector3 reflected = Vector3::Reflect(ray.Direction().Normalize(), hit_info.normal);
       scattered = Ray(hit_info.point, reflected + fuzz * Utils::RandomInUnitSphere(), ray.Time());

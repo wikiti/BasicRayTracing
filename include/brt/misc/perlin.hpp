@@ -16,12 +16,12 @@ namespace BRT
 
         double Noise(const Point3&) const;
         double Turbulence(const Point3&, int depth = 7) const;
-      
+
       private:
 
         static int* GeneratePermutation();
         static void Permute(int* permutation, int n);
-    
+
       private:
 
         static const int PointCount;

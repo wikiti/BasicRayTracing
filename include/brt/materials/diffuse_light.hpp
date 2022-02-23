@@ -18,8 +18,9 @@ namespace BRT
       public:
 
         DiffuseLight(std::shared_ptr<Textures::Texture>);
+        DiffuseLight(const Color& colo);
 
-        virtual bool Scatter(const Ray&, const Hittables::HitInfo&, Color&, Ray&) const;
+        virtual bool Scatter(const Ray&, const Hittables::HitInfo&, Color&, Ray&, double&) const;
         virtual Color Emit(double u, double v, const Point3& point) const;
     };
   }

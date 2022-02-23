@@ -11,8 +11,8 @@ namespace BRT
     Dielectric::Dielectric(double refraction_index) : refraction_index(refraction_index)
     {}
 
-    bool Dielectric::Scatter(const Ray& ray, const Hittables::HitInfo& hit_info, Color& attenuation,
-      Ray& scattered) const
+    bool Dielectric::Scatter(const Ray& ray, const Hittables::HitInfo& hit_info, Color& attenuation, Ray& scattered,
+                             double& pdf) const
     {
       attenuation = Color(1.0, 1.0, 1.0);
       double refraction = hit_info.front_face ? 1.0 / refraction_index : refraction_index;
@@ -33,14 +33,12 @@ namespace BRT
       return true;
     }
 
-
-    bool Dielectric::ShouldReflect(const Vector3& dir, const Hittables::HitInfo& hit_info,
-                                   double refraction) const
+    bool Dielectric::ShouldReflect(const Vector3& dir, const Hittables::HitInfo& hit_info, double refraction) const
     {
       // Angle between the normal and the ray before refraction
       double cos_theta = std::fmin(Vector3::Dot(-dir, hit_info.normal), 1.0);
       // Trigonometrics (sin(x)^2 + cos(x)^2 = 1)
-      double sin_theta = std::sqrt(1.0 - cos_theta*cos_theta);
+      double sin_theta = std::sqrt(1.0 - cos_theta * cos_theta);
 
       // Either Snell's law doesn't have a solution, or angle make the ray reflect
       return refraction * sin_theta > 1.0 || Utils::Random() < Schlick(cos_theta, refraction);

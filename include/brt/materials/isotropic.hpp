@@ -19,7 +19,7 @@ namespace BRT
 
         Isotropic(std::shared_ptr<Textures::Texture> albedo);
 
-        virtual bool Scatter(const Ray&, const Hittables::HitInfo&, Color&, Ray&) const;
+        virtual bool Scatter(const Ray&, const Hittables::HitInfo&, Color&, Ray&, double&) const;
     };
   }
 }

@@ -1,0 +1,13 @@
+---
+Language: Cpp
+BasedOnStyle: Microsoft
+IndentWidth: 2
+IndentAccessModifiers: true
+FixNamespaceComments: false
+NamespaceIndentation: All
+EmptyLineBeforeAccessModifier: Always
+EmptyLineAfterAccessModifier: Always
+PointerAlignment: Left
+BreakBeforeBraces: Custom
+BraceWrapping:
+  SplitEmptyFunction: false

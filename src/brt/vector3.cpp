@@ -5,11 +5,12 @@
 #include "brt/utils.hpp"
 #include "brt/vector3.hpp"
 
-namespace BRT {
-  Vector3::Vector3() : components { 0, 0, 0 }
+namespace BRT
+{
+  Vector3::Vector3() : components{0, 0, 0}
   {}
 
-  Vector3::Vector3(double x, double y, double z) : components { x, y, z }
+  Vector3::Vector3(double x, double y, double z) : components{x, y, z}
   {}
 
   const Vector3 Vector3::Zero = Vector3();
@@ -86,6 +87,12 @@ namespace BRT {
     return X() * X() + Y() * Y() + Z() * Z();
   }
 
+  bool Vector3::NearZero() const
+  {
+    const auto s = 1e-8;
+    return (std::fabs(X()) < s) && (std::fabs(Y()) < s) && (std::fabs(Z()) < s);
+  }
+
   Vector3::operator Color() const
   {
     return Color(X(), Y(), Z());
@@ -98,11 +105,7 @@ namespace BRT {
 
   Vector3 Vector3::Cross(const Vector3& u, const Vector3& v)
   {
-    return Vector3(
-      u.Y() * v.Z() - u.Z() * v.Y(),
-      u.Z() * v.X() - u.X() * v.Z(),
-      u.X() * v.Y() - u.Y() * v.X()
-    );
+    return Vector3(u.Y() * v.Z() - u.Z() * v.Y(), u.Z() * v.X() - u.X() * v.Z(), u.X() * v.Y() - u.Y() * v.X());
   }
 
   Vector3 Vector3::Sqrt(const Vector3& u)
@@ -166,21 +169,21 @@ namespace BRT {
 
   Vector3 operator*(const Vector3& u, const Vector3& v)
   {
-      return Vector3(u.X() * v.X(), u.Y() * v.Y(), u.Z() * v.Z());
+    return Vector3(u.X() * v.X(), u.Y() * v.Y(), u.Z() * v.Z());
   }
 
   Vector3 operator*(double t, const Vector3& v)
   {
-      return Vector3(t * v.X(), t * v.Y(), t * v.Z());
+    return Vector3(t * v.X(), t * v.Y(), t * v.Z());
   }
 
   Vector3 operator*(const Vector3& v, double t)
   {
-      return t * v;
+    return t * v;
   }
 
   Vector3 operator/(const Vector3& v, double t)
   {
-      return (1 / t) * v;
+    return (1 / t) * v;
   }
 }

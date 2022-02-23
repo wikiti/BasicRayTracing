@@ -16,7 +16,7 @@ namespace BRT
 
         Dielectric(double);
 
-        virtual bool Scatter(const Ray&, const Hittables::HitInfo&, Color&, Ray&) const;
+        virtual bool Scatter(const Ray&, const Hittables::HitInfo&, Color&, Ray&, double&) const;
 
       private:
 

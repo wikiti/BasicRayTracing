@@ -8,8 +8,8 @@ namespace BRT
     Isotropic::Isotropic(std::shared_ptr<Textures::Texture> albedo) : albedo(albedo)
     {}
 
-    bool Isotropic::Scatter(const Ray& ray, const Hittables::HitInfo& hit_info, Color& attenuation,
-      Ray& scattered) const
+    bool Isotropic::Scatter(const Ray& ray, const Hittables::HitInfo& hit_info, Color& attenuation, Ray& scattered,
+                            double& pdf) const
     {
       scattered = Ray(hit_info.point, Utils::RandomInUnitSphere(), ray.Time());
       attenuation = albedo->Value(hit_info.u, hit_info.v, hit_info.point);

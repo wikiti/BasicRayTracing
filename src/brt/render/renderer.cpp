@@ -10,8 +10,8 @@ namespace BRT
 {
   namespace Render
   {
-    Renderer::Renderer(const Camera& camera, std::shared_ptr<Hittables::Hittable> world,
-      const Color& background) : camera(camera), world(world), background(background)
+    Renderer::Renderer(const Camera& camera, std::shared_ptr<Hittables::Hittable> world, const Color& background)
+        : camera(camera), world(world), background(background)
     {}
 
     void Renderer::Render(Image& out, int samples_per_pixel, int max_depth, int thread_count)
@@ -24,14 +24,8 @@ namespace BRT
 
       for (auto& thread : threads)
       {
-        thread = std::thread(
-          &Renderer::RenderThread,
-          this,
-          std::ref(progress),
-          std::ref(out),
-          samples_per_pixel,
-          max_depth
-        );
+        thread =
+            std::thread(&Renderer::RenderThread, this, std::ref(progress), std::ref(out), samples_per_pixel, max_depth);
       }
 
       for (auto& thread : threads)
@@ -40,8 +34,7 @@ namespace BRT
       }
     }
 
-    void Renderer::RenderThread(Progress& progress, Image& out, int samples_per_pixel,
-      int max_depth)
+    void Renderer::RenderThread(Progress& progress, Image& out, int samples_per_pixel, int max_depth)
     {
       Pixel* pixel;
       while (pixel = RequestPixel(out))
@@ -73,8 +66,7 @@ namespace BRT
       return &image.PixelAt(index);
     }
 
-    void Renderer::RenderPixel(const Image& image, Pixel& pixel,
-      int samples_per_pixel, int max_depth) const
+    void Renderer::RenderPixel(const Image& image, Pixel& pixel, int samples_per_pixel, int max_depth) const
     {
       Color pixel_color;
 
@@ -104,15 +96,18 @@ namespace BRT
       }
 
       Ray scattered;
-      Color attenuation;
+      Color attenuation; // Not currently used
       Color emitted = hit_info.material->Emit(hit_info.u, hit_info.v, hit_info.point);
+      double pdf;
+      Color albedo;
 
-      if (!hit_info.material->Scatter(ray, hit_info, attenuation, scattered))
+      if (!hit_info.material->Scatter(ray, hit_info, albedo, scattered, pdf))
       {
         return emitted;
       }
 
-      return emitted + attenuation * RayColor(scattered, depth - 1);
+      return emitted +
+             albedo * hit_info.material->ScatteringPdf(ray, hit_info, scattered) * RayColor(scattered, depth - 1) / pdf;
     }
   }
 }

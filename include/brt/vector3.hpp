@@ -44,6 +44,8 @@ namespace BRT
       double Length() const;
       double LengthSquared() const;
 
+      bool NearZero() const;
+
       operator Color() const;
 
       static double Dot(const Vector3&, const Vector3&);
