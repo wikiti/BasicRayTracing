@@ -37,25 +37,35 @@ std::shared_ptr<Hittables::HittableList> CornellBox()
 
 int main()
 {
-  const auto aspect_ratio = 1.0 / 1.0;
-  const auto image_width = 600;
-  const auto image_height = static_cast<int>(image_width / aspect_ratio);
+  for (int i = 0; i < 200; i++)
+  {
+    auto r1 = Utils::Random();
+    auto r2 = Utils::Random();
+    auto x = cos(2 * Utils::Pi * r1) * 2 * sqrt(r2 * (1 - r2));
+    auto y = sin(2 * Utils::Pi * r1) * 2 * sqrt(r2 * (1 - r2));
+    auto z = 1 - 2 * r2;
+    std::cout << x << " " << y << " " << z << '\n';
+  }
 
-  const auto fov = 40.0;
-  const auto aperture = 0.0;
+  // const auto aspect_ratio = 1.0 / 1.0;
+  // const auto image_width = 600;
+  // const auto image_height = static_cast<int>(image_width / aspect_ratio);
 
-  const Color background(0, 0, 0);
-  const Point3 look_from(278, 278, -800);
-  const Point3 look_at(278, 278, 0);
+  // const auto fov = 40.0;
+  // const auto aperture = 0.0;
 
-  std::shared_ptr<Hittables::Hittable> world = CornellBox();
+  // const Color background(0, 0, 0);
+  // const Point3 look_from(278, 278, -800);
+  // const Point3 look_at(278, 278, 0);
 
-  Render::Camera camera(look_from, look_at, Vector3::Up, aspect_ratio, fov, aperture);
-  Render::Image image(image_width, image_height);
-  Render::Renderer renderer(camera, world, background);
+  // std::shared_ptr<Hittables::Hittable> world = CornellBox();
 
-  renderer.Render(image, 100, 50);
-  std::cout << image;
+  // Render::Camera camera(look_from, look_at, Vector3::Up, aspect_ratio, fov, aperture);
+  // Render::Image image(image_width, image_height);
+  // Render::Renderer renderer(camera, world, background);
+
+  // renderer.Render(image, 100, 50);
+  // std::cout << image;
 
   return 0;
 }
