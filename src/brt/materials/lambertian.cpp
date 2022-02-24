@@ -16,16 +16,10 @@ namespace BRT
     bool Lambertian::Scatter(const Ray& ray, const Hittables::HitInfo& hit_info, Color& attenuation, Ray& scattered,
                              double& pdf) const
     {
-      // Vector3 scatter_direction = hit_info.normal + Utils::RandomInHemisphere();
-      Vector3 scatter_direction = hit_info.normal + Utils::RandomUnitVector();
-      if (scatter_direction.NearZero())
-      {
-        scatter_direction = hit_info.normal;
-      }
-
-      scattered = Ray(hit_info.point, scatter_direction.Normalize(), ray.Time());
+      auto direction = Utils::RandomInHemisphere(hit_info.normal);
+      scattered = Ray(hit_info.point, direction.Normalize(), ray.Time());
       attenuation = albedo->Value(hit_info.u, hit_info.v, hit_info.point);
-      pdf = Vector3::Dot(hit_info.normal, scattered.Direction()) / Utils::Pi;
+      pdf = 0.5 / Utils::Pi;
 
       return true;
     }
