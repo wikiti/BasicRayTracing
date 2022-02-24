@@ -35,17 +35,33 @@ std::shared_ptr<Hittables::HittableList> CornellBox()
   return objects;
 }
 
+inline Vector3 RandomCosineDirection()
+{
+  auto r1 = Utils::Random();
+  auto r2 = Utils::Random();
+  auto z = sqrt(1 - r2);
+
+  auto phi = 2 * Utils::Pi * r1;
+  auto x = cos(phi) * sqrt(r2);
+  auto y = sin(phi) * sqrt(r2);
+
+  return Vector3(x, y, z);
+}
+
 int main()
 {
-  for (int i = 0; i < 200; i++)
+  int N = 1000000;
+
+  auto sum = 0.0;
+  for (int i = 0; i < N; i++)
   {
-    auto r1 = Utils::Random();
-    auto r2 = Utils::Random();
-    auto x = cos(2 * Utils::Pi * r1) * 2 * sqrt(r2 * (1 - r2));
-    auto y = sin(2 * Utils::Pi * r1) * 2 * sqrt(r2 * (1 - r2));
-    auto z = 1 - 2 * r2;
-    std::cout << x << " " << y << " " << z << '\n';
+    auto v = RandomCosineDirection();
+    sum += v.Z() * v.Z() * v.Z() / (v.Z() / Utils::Pi);
   }
+
+  std::cout << std::fixed << std::setprecision(12);
+  std::cout << "Pi/2     = " << Utils::Pi / 2 << '\n';
+  std::cout << "Estimate = " << sum / N << '\n';
 
   // const auto aspect_ratio = 1.0 / 1.0;
   // const auto image_width = 600;
