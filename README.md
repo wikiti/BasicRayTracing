@@ -2,7 +2,7 @@
 
 An implementation of a CPU Ray Tracing engine, created by following the "Ray Tracing in One Weekend" tutorial (actually, it took me nearly one week for the first part).
 
-![Sample render](images/cornell-box-orthonormal-basis.png)
+![Sample render](images/cornell-box-better-light-sampling.png)
 
 ## Build
 

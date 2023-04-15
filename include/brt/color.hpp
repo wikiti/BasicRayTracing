@@ -12,6 +12,11 @@ namespace BRT
 
     public:
 
+      static const Color Black;
+      static const Color White;
+
+    public:
+
       double R() const;
       double G() const;
       double B() const;

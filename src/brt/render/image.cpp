@@ -12,7 +12,7 @@ namespace BRT
       {
         for (int x = 0; x < Width(); ++x)
         {
-          pixels.push_back(Pixel(Color(0, 0, 0), x, y));
+          pixels.push_back(Pixel(Color::Black, x, y));
         }
       }
     }

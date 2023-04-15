@@ -9,7 +9,7 @@ namespace BRT
       return 0;
     }
 
-    Color Material::Emit(double u, double v, const Point3& p) const
+    Color Material::Emit(const Ray& ray, const Hittables::HitInfo& hit_info, double u, double v, const Point3& p) const
     {
       return Color::Zero;
     }

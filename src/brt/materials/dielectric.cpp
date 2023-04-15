@@ -14,7 +14,7 @@ namespace BRT
     bool Dielectric::Scatter(const Ray& ray, const Hittables::HitInfo& hit_info, Color& attenuation, Ray& scattered,
                              double& pdf) const
     {
-      attenuation = Color(1.0, 1.0, 1.0);
+      attenuation = Color::White;
       double refraction = hit_info.front_face ? 1.0 / refraction_index : refraction_index;
 
       Vector3 before = ray.Direction().Normalize();

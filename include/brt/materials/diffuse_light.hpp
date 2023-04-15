@@ -21,7 +21,7 @@ namespace BRT
         DiffuseLight(const Color& colo);
 
         virtual bool Scatter(const Ray&, const Hittables::HitInfo&, Color&, Ray&, double&) const;
-        virtual Color Emit(double u, double v, const Point3& point) const;
+        virtual Color Emit(const Ray&, const Hittables::HitInfo&, double u, double v, const Point3& point) const;
     };
   }
 }

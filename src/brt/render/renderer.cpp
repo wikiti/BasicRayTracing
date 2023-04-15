@@ -86,7 +86,7 @@ namespace BRT
     {
       if (depth <= 0)
       {
-        return Color(0, 0, 0);
+        return Color::Black;
       }
 
       Hittables::HitInfo hit_info;
@@ -98,7 +98,7 @@ namespace BRT
 
       Ray scattered;
       Color attenuation; // Not currently used
-      Color emitted = hit_info.material->Emit(hit_info.u, hit_info.v, hit_info.point);
+      Color emitted = hit_info.material->Emit(ray, hit_info, hit_info.u, hit_info.v, hit_info.point);
       double pdf;
       Color albedo;
 

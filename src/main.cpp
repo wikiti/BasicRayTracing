@@ -13,19 +13,28 @@ std::shared_ptr<Hittables::HittableList> CornellBox()
   auto green = std::make_shared<Materials::Lambertian>(Color(.12, .45, .15));
   auto light = std::make_shared<Materials::DiffuseLight>(Color(15, 15, 15));
 
+  // Walls
   objects->Add(std::make_shared<Hittables::YZRectangle>(0, 555, 0, 555, 555, green));
   objects->Add(std::make_shared<Hittables::YZRectangle>(0, 555, 0, 555, 0, red));
-  objects->Add(std::make_shared<Hittables::XZRectangle>(213, 343, 227, 332, 554, light));
   objects->Add(std::make_shared<Hittables::XZRectangle>(0, 555, 0, 555, 555, white));
   objects->Add(std::make_shared<Hittables::XZRectangle>(0, 555, 0, 555, 0, white));
   objects->Add(std::make_shared<Hittables::XYRectangle>(0, 555, 0, 555, 555, white));
 
+  // Light
+  objects->Add(
+    std::make_shared<Hittables::FlipFace>(
+      std::make_shared<Hittables::XZRectangle>(213, 343, 227, 332, 554, light)
+    )
+  );
+
+  // Box 1
   std::shared_ptr<Hittables::Hittable> box1 =
       std::make_shared<Hittables::Box>(Point3(0, 0, 0), Point3(165, 330, 165), white);
   box1 = std::make_shared<Hittables::RotateY>(box1, 15);
   box1 = std::make_shared<Hittables::Translate>(box1, Vector3(265, 0, 295));
   objects->Add(box1);
 
+  // Box 2
   std::shared_ptr<Hittables::Hittable> box2 =
       std::make_shared<Hittables::Box>(Point3(0, 0, 0), Point3(165, 165, 165), white);
   box2 = std::make_shared<Hittables::RotateY>(box2, -18);

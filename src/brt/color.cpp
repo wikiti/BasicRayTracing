@@ -4,6 +4,10 @@
 #include "brt/utils.hpp"
 
 namespace BRT {
+
+  const Color Color::Black = Color::Black;
+  const Color Color::White = Color::White;
+
   double Color::R() const
   {
     return X();

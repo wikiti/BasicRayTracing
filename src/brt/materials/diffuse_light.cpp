@@ -17,9 +17,17 @@ namespace BRT
       return false;
     }
 
-    Color DiffuseLight::Emit(double u, double v, const Point3& point) const
+    Color DiffuseLight::Emit(const Ray& ray, const Hittables::HitInfo& hit_info, double u, double v,
+                             const Point3& point) const
     {
-      return emit_texture->Value(u, v, point);
+      if (hit_info.front_face)
+      {
+        return emit_texture->Value(u, v, point);
+      }
+      else
+      {
+        return Color::Black;
+      }
     }
   }
 }
