@@ -1,3 +1,4 @@
+#include <cmath>
 #include <iostream>
 #include <thread>
 
@@ -105,6 +106,27 @@ namespace BRT
       {
         return emitted;
       }
+
+      Point3 on_light = Point3(Utils::Random(213, 343), 554, Utils::Random(227, 332));
+      Point3 to_light = on_light - hit_info.point;
+      double distance_squared = to_light.LengthSquared();
+      to_light = to_light.Normalize();
+
+      if (Vector3::Dot(to_light, hit_info.normal) < 0)
+      {
+        return emitted;
+      }
+
+      double light_area = (343-213)*(332-227);
+      auto light_cosine = std::fabs(to_light.Y());
+
+      if (light_cosine < 0.000001)
+      {
+          return emitted;
+      }
+
+      pdf = distance_squared / (light_cosine * light_area);
+      scattered = Ray(hit_info.point, to_light, ray.Time());
 
       return emitted +
              albedo * hit_info.material->ScatteringPdf(ray, hit_info, scattered) * RayColor(scattered, depth - 1) / pdf;

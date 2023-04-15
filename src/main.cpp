@@ -54,7 +54,7 @@ int main()
   Render::Image image(image_width, image_height);
   Render::Renderer renderer(camera, world, background);
 
-  renderer.Render(image, 256, 50);
+  renderer.Render(image, 10, 50);
   std::cout << image;
 
   return 0;
