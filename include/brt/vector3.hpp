@@ -31,7 +31,7 @@ namespace BRT
       double Y() const;
       double Z() const;
 
-      Vector3 Normalize();
+      Vector3 Normalize() const;
 
       Vector3 operator-() const;
       double operator[](int) const;

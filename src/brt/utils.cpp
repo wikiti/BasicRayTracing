@@ -69,6 +69,19 @@ namespace BRT
     return Vector3(r*std::cos(a), r*std::sin(a), z);
   }
 
+  Vector3 Utils::RandomCosineDirection()
+  {
+    auto r1 = Utils::Random();
+    auto r2 = Utils::Random();
+    auto z = sqrt(1 - r2);
+
+    auto phi = 2 * Utils::Pi * r1;
+    auto x = cos(phi) * sqrt(r2);
+    auto y = sin(phi) * sqrt(r2);
+
+    return Vector3(x, y, z);
+  }
+
   // https://en.wikipedia.org/wiki/UV_mapping#Finding_UV_on_a_sphere
   void Utils::SphereUV(const Vector3& point, double& u, double& v)
   {

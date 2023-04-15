@@ -22,6 +22,7 @@ namespace BRT
       static Vector3 RandomInUnitDisk();
       static Vector3 RandomInHemisphere(const Vector3&);
       static Vector3 RandomUnitVector();
+      static Vector3 RandomCosineDirection();
 
       static void SphereUV(const Vector3& point, double& u, double& v);
 

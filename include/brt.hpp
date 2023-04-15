@@ -26,6 +26,7 @@
 #include "brt/materials/metal.hpp"
 
 #include "brt/misc/axis.hpp"
+#include "brt/misc/orthonormal_basis.hpp"
 #include "brt/misc/perlin.hpp"
 #include "brt/misc/plane.hpp"
 

@@ -36,7 +36,7 @@ namespace BRT
     return components[2];
   }
 
-  Vector3 Vector3::Normalize()
+  Vector3 Vector3::Normalize() const
   {
     return *this / Length();
   }

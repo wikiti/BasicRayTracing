@@ -1,4 +1,5 @@
 #include "brt/materials/lambertian.hpp"
+#include "brt/misc/orthonormal_basis.hpp"
 #include "brt/textures/solid_color.hpp"
 #include "brt/utils.hpp"
 #include "brt/vector3.hpp"
@@ -16,10 +17,11 @@ namespace BRT
     bool Lambertian::Scatter(const Ray& ray, const Hittables::HitInfo& hit_info, Color& attenuation, Ray& scattered,
                              double& pdf) const
     {
-      auto direction = Utils::RandomInHemisphere(hit_info.normal);
+      Misc::OrthonormalBasis orthonormalBasis = Misc::OrthonormalBasis::BuildFromW(hit_info.normal);
+      Vector3 direction = orthonormalBasis.Local(Utils::RandomCosineDirection());
       scattered = Ray(hit_info.point, direction.Normalize(), ray.Time());
       attenuation = albedo->Value(hit_info.u, hit_info.v, hit_info.point);
-      pdf = 0.5 / Utils::Pi;
+      pdf = Vector3::Dot(orthonormalBasis.W(), scattered.Direction()) / Utils::Pi;
 
       return true;
     }
